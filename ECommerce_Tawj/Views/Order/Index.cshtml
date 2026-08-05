@@ -1,0 +1,80 @@
+﻿@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Order List";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/Orders.css" />
+}
+<main class="flex-grow-1 p-4 p-md-5" style="max-width: 1000px">
+    <h4 class="fw-bold text-dark mb-4">Orders</h4>
+
+    <div class="orders-list">
+        <!-- Order Item 1 -->
+        <div class="order-card d-flex gap-3 align-items-start">
+            <div class="order-icon-box">
+                <i class="fa-solid fa-box"></i>
+            </div>
+
+            <div class="row w-100 g-3">
+                <!-- Items Details -->
+                <div class="col-md-4">
+                    <p class="fw-bold text-dark mb-1 small">
+                        Bose QuietComfort 45 x 1, PlayStation 5 x 2
+                    </p>
+                    <span class="text-muted small">Items : 2</span>
+                </div>
+
+                <!-- Customer Details -->
+                <div class="col-md-3">
+                    <p class="fw-bold text-dark mb-0 small">John Doe</p>
+                    <p class="text-muted mb-0 small">123 Main St</p>
+                    <p class="text-muted mb-0 small">New York, NY</p>
+                    <p class="text-muted mb-0 small">9876543210</p>
+                </div>
+
+                <!-- Total Price -->
+                <div class="col-md-2 text-md-center">
+                    <span class="fw-bold text-dark">$1355.97</span>
+                </div>
+
+                <!-- Payment Info -->
+                <div class="col-md-3">
+                    <p class="text-muted mb-0 small">Method : COD</p>
+                    <p class="text-muted mb-0 small">Date : 7/25/2026</p>
+                    <p class="text-muted mb-0 small">Payment : Pending</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Item 2 -->
+        <div class="order-card d-flex gap-3 align-items-start">
+            <div class="order-icon-box">
+                <i class="fa-solid fa-box"></i>
+            </div>
+
+            <div class="row w-100 g-3">
+                <div class="col-md-4">
+                    <p class="fw-bold text-dark mb-1 small">Canon EOS R5 x 5</p>
+                    <span class="text-muted small">Items : 1</span>
+                </div>
+
+                <div class="col-md-3">
+                    <p class="fw-bold text-dark mb-0 small">John Doe</p>
+                    <p class="text-muted mb-0 small">123 Main St</p>
+                    <p class="text-muted mb-0 small">New York, NY</p>
+                    <p class="text-muted mb-0 small">9876543210</p>
+                </div>
+
+                <div class="col-md-2 text-md-center">
+                    <span class="fw-bold text-dark">$19888.95</span>
+                </div>
+
+                <div class="col-md-3">
+                    <p class="text-muted mb-0 small">Method : COD</p>
+                    <p class="text-muted mb-0 small">Date : 7/25/2026</p>
+                    <p class="text-muted mb-0 small">Payment : Pending</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

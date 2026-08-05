@@ -1,0 +1,109 @@
+﻿@using ECommerce_Tawj.DTOs.ProductsDTOs
+@model IEnumerable<ProductsHomeDTO>
+
+@{
+    ViewData["Title"] = "My Favorites";
+    Layout = "_Layout";
+}
+
+<section class="container my-5">
+    <!-- Header Section -->
+    <div class="d-flex align-items-center justify-content-between mb-4 border-bottom pb-3">
+        <div>
+            <h2 class="fw-bold text-dark m-0">
+                <i class="fa-solid fa-heart text-danger me-2"></i>My Favorites
+            </h2>
+            <p class="text-muted small mb-0 mt-1">Manage and view all your saved items</p>
+        </div>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary rounded-3 btn-sm">
+            <i class="fa-solid fa-arrow-left me-1"></i> Continue Shopping
+        </a>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="row g-4" id="favoritesContainer">
+            @foreach (var product in Model)
+            {
+                <div class="col-6 col-md-4 col-lg-3 favorite-card-wrapper" id="favorite-card-@product.Id">
+                    <div class="card h-100 border-0 bg-light rounded-4 p-3 position-relative product-card shadow-sm">
+                        
+                        <!-- Toggle Favorite Button (Filled Red Heart) -->
+                        <button class="btn btn-white rounded-circle shadow-sm position-absolute top-0 end-0 m-3 p-1 px-2 border-0 bg-white btn-favorite"
+                                data-product-id="@product.Id"
+                                title="Remove from Favorites">
+                            <i class="fa-solid fa-heart text-danger fs-5"></i>
+                        </button>
+
+                        <!-- Product Image -->
+                        <div class="text-center py-3" style="height: 160px;">
+                            <img src="@product.MainImage" class="img-fluid h-100" style="object-fit: contain;" alt="@product.ProductName" />
+                        </div>
+
+                        <!-- Product Body -->
+                        <div class="card-body p-0 d-flex flex-column justify-content-end">
+                            <span class="badge bg-secondary mb-1 align-self-start">@product.CategoryName</span>
+                            <h6 class="fw-bold text-dark mb-1 text-truncate">@product.ProductName</h6>
+                            <p class="text-muted small mb-2 text-truncate">@product.ProductDescription</p>
+                            
+                            <div class="text-warning small mb-2">
+                                <i class="fa-solid fa-star"></i> @product.AverageRating
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <span class="fw-bold text-dark fs-5">$@product.ProductPrice</span>
+                                
+                                <!-- Add to Cart Button -->
+                                <button class="btn text-white btn-sm rounded-pill px-3" style="background-color: #ff5722;">
+                                    <i class="fa-solid fa-cart-plus me-1"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // التعامل مع حذف المنتجات من صفحة المفضلة بـ AJAX
+            $(document).on('click', '.btn-favorite', function (e) {
+                e.preventDefault();
+                var button = $(this);
+                var productId = button.data('product-id');
+                var cardWrapper = $('#favorite-card-' + productId);
+
+                $.ajax({
+                    url: '/Favorite/ToggleFavorite',
+                    type: 'POST',
+                    data: { productId: productId },
+                    success: function (response) {
+                        if (response.success && !response.isFavorite) {
+                            // اختفاء كارت المنتج بسلاسة عند إلغاء التفضيل
+                            cardWrapper.fadeOut(300, function () {
+                                $(this).remove();
+
+                                // لو أصبحت قائمة المفضلة فارغة كلياً يُعرض الـ Empty State
+                                if ($('.favorite-card-wrapper').length === 0) {
+                                    $('#favoritesContainer').html(`
+                                        <div class="col-12 text-center py-5 my-5">
+                                            <div class="mb-3">
+                                                <i class="fa-regular fa-heart display-1 text-muted opacity-50"></i>
+                                            </div>
+                                            <h4 class="fw-bold text-dark">Your Favorites List is Empty</h4>
+                                            <p class="text-muted small mb-4">You haven't saved any items to your wishlist yet.</p>
+                                            <a href="/Home/Index" class="btn text-white px-4 py-2 rounded-3 fw-semibold" style="background-color: #ff5722;">
+                                                Explore Products
+                                            </a>
+                                        </div>
+                                    `);
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

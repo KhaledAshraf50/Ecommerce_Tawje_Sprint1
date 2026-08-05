@@ -1,0 +1,45 @@
+﻿body {
+    background-color: #f4f6f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.auth-card {
+    max-width: 420px;
+    width: 100%;
+    border: none;
+    border-radius: 1.25rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.btn-orange {
+    background-color: #ff5722;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+    .btn-orange:hover {
+        background-color: #e64a19;
+        color: #fff;
+    }
+
+.form-control:focus {
+    border-color: #ff5722;
+    box-shadow: 0 0 0 0.25rem rgba(255, 87, 34, 0.15);
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border-right: none;
+    color: #6c757d;
+}
+
+.form-control-with-icon {
+    border-left: none;
+}
+
+.form-check-input:checked {
+    background-color: #ff5722;
+    border-color: #ff5722;
+}

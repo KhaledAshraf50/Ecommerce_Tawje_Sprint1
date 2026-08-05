@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QuickCart - Admin Overview</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+          <link href="~/css/adminStyle.css" rel="stylesheet" />
+    @await RenderSectionAsync("Styles",required:false)
+</head>
+<body>
+    <header class="admin-nav d-flex align-items-center justify-content-between px-4">
+        <a class="navbar-brand fw-bold fs-3 text-dark" href="#">
+            <span class="text-danger">Q</span>uick<span class="fw-bold">Cart</span>
+        </a>
+        <button class="btn btn-dark btn-sm rounded-pill px-3">Logout</button>
+    </header>
+    <div class="d-flex">
+        <aside class="sidebar py-3">
+            <a asp-controller="Admin" asp-action="Index" class="sidebar-link active">
+                <i class="fa-solid fa-chart-pie fs-5"></i>
+                <span>Overview</span>
+            </a>
+            <a asp-controller="Product" asp-action="Create" class="sidebar-link">
+                <i class="fa-regular fa-square-plus fs-5"></i>
+                <span>Add Product</span>
+            </a>
+            <a asp-controller="Product" asp-action="Index" class="sidebar-link">
+                <i class="fa-solid fa-list-check fs-5"></i>
+                <span>Product List</span>
+            </a>
+            <a asp-controller="Category" asp-action="Index" class="sidebar-link">
+                <i class="fa-solid fa-layer-group fs-5"></i>
+                <span>Categories</span>
+            </a>
+            <a asp-controller="Order" asp-action="Index" class="sidebar-link">
+                <i class="fa-regular fa-calendar-check fs-5"></i>
+                <span>Orders</span>
+            </a>
+            <a asp-controller="User" asp-action="Index" class="sidebar-link">
+                <i class="fa-solid fa-users-gear fs-5"></i>
+                <span>Users Management</span>
+            </a>
+        </aside>
+        @RenderBody()
+    </div>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

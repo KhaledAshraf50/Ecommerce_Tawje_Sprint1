@@ -1,0 +1,143 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> _signInManager
+@inject UserManager<ApplicationUser> _userManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ECommerce_Tawj</title>
+    <script type="importmap"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-white py-3 border-bottom">
+            <div class="container">
+                <!-- Logo -->
+                <a class="navbar-brand fw-bold text-dark fs-4" asp-controller="Home" asp-action="Index">
+                    Quick<span class="text-danger">Cart</span>
+                </a>
+                <!-- Toggle Mobile Button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <!-- Navigation Links -->
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active fw-medium" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-medium" href="#Shop">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Favorite" asp-action="Index" class="nav-link fw-medium" title="My Favorites">
+                                MyFavorite
+                            </a>
+                        </li>
+                  
+                    </ul>
+                    <!-- User Profile / Account -->
+                    <div class="d-flex align-items-center gap-3">
+                        @if (_signInManager.IsSignedIn(User))
+                        {
+                            <!-- Cart Button (Visible for logged in user) -->
+                            <a asp-controller="Cart" asp-action="Index" class="btn btn-light rounded-circle position-relative p-2">
+                                <i class="fa-solid fa-cart-shopping fs-5 text-dark"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    3
+                                </span>
+                            </a>
+
+                            <!-- User Profile / Account -->
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary dropdown-toggle rounded-3" type="button" data-bs-toggle="dropdown">
+                                    <i class="fa-regular fa-user me-1"></i> @User.Identity?.Name
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-menu-item dropdown-item" href="#">My Profile</a></li>
+                                    <li><a class="dropdown-menu-item dropdown-item" href="#">Orders</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item text-danger fw-bold" asp-controller="Account" asp-action="Logout">
+                                            <i class="fa-solid fa-arrow-right-from-bracket me-1"></i> Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <!-- Login & Register Links (Visible for Anonymous Users) -->
+                            <a asp-controller="Account" asp-action="Login" class="btn btn-outline-dark rounded-3 px-3">
+                                Login
+                            </a>
+                            <a asp-controller="Account" asp-action="Register" class="btn btn-orange text-white rounded-3 px-3" style="background-color: #ff5722;">
+                                Register
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="bg-white border-top py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <a class="navbar-brand fw-bold fs-3 text-dark" href="#">
+                        <span class="text-danger">Q</span>uick<span class="fw-bold">Cart</span>
+                    </a>
+                    <p class="text-muted small mt-3 col-lg-9">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting
+                        industry. Lorem Ipsum has been the industry's standard dummy text
+                        ever since the 1500s.
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="fw-bold mb-3">Company</h6>
+                    <ul class="list-unstyled text-muted small d-flex flex-column gap-2">
+                        <li>
+                            <a asp-action="Index" asp-controller="Home" class="text-decoration-none text-muted">Home</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-decoration-none text-muted">About us</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-decoration-none text-muted">Contact us</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-decoration-none text-muted">Privacy policy</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="fw-bold mb-3">Get in touch</h6>
+                    <p class="text-muted small mb-1">+201096541656</p>
+                    <p class="text-muted small">contact@greatstack.dev</p>
+                </div>
+            </div>
+            <hr class="my-4 text-muted" />
+            <p class="text-center text-muted small mb-0">
+                Copyright 2025 © GreatStack.dev All Right Reserved.
+            </p>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

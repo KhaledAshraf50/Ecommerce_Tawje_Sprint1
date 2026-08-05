@@ -1,0 +1,54 @@
+﻿/* Custom Colors */
+:root {
+    --primary-orange: #f05423;
+    --hero-bg: #eef2f6;
+}
+
+.text-orange {
+    color: var(--primary-orange);
+}
+
+.btn-orange {
+    background-color: var(--primary-orange);
+    border: none;
+}
+
+    .btn-orange:hover {
+        background-color: #d84315;
+    }
+
+.custom-hero-bg {
+    background-color: var(--hero-bg);
+}
+
+/* Dots Styling */
+.custom-dot {
+    width: 10px !important;
+    height: 10px !important;
+    background-color: #ccc !important;
+    border: none !important;
+}
+
+    .custom-dot.active {
+        background-color: var(--primary-orange) !important;
+    }
+
+/* 5 Columns Layout for Responsive Grid */
+@media (min-width: 992px) {
+    .col-lg-2-4 {
+        flex: 0 0 auto;
+        width: 20%;
+    }
+}
+
+.fit-content {
+    width: fit-content;
+}
+
+.product-card {
+    transition: transform 0.2s ease;
+}
+
+    .product-card:hover {
+        transform: translateY(-5px);
+    }

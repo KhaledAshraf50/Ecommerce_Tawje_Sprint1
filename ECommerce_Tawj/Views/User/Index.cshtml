@@ -1,0 +1,128 @@
+﻿@{
+
+    ViewData["Title"] = "Product List";
+    Layout = "_AdminLayout";
+}
+@section Styles{
+    <link href="~/css/Users.css" rel="stylesheet" />
+}
+<main class="flex-grow-1 p-4 p-md-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold text-dark mb-0">Users Management</h4>
+
+        <!-- Search Box (Sprint Challenge) -->
+        <div class="input-group style-search" style="max-width: 300px">
+            <span class="input-group-text bg-white border-end-0">
+                <i class="fa-solid fa-magnifying-glass text-muted"></i>
+            </span>
+            <input type="text"
+                   class="form-control border-start-0"
+                   placeholder="Search user or email..." />
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive user-table">
+        <table class="table align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>User Details</th>
+                    <th>Role</th>
+                    <th>Lock Status</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- User 1 -->
+                <tr>
+                    <td>
+                        <div>
+                            <div class="fw-bold text-dark">Ahmed Ali</div>
+                            <div class="text-muted small">ahmed.ali@example.com</div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="badge badge-role-admin px-3 py-2 rounded-pill">Admin</span>
+                    </td>
+                    <td>
+                        <span class="badge badge-status-active px-3 py-2 rounded-pill">Active</span>
+                    </td>
+                    <td class="text-end">
+                        <button class="btn btn-outline-warning btn-action btn-sm me-1">
+                            Demote to Customer
+                        </button>
+                        <button class="btn btn-outline-danger btn-action btn-sm">
+                            Lock Account
+                        </button>
+                    </td>
+                </tr>
+
+                <!-- User 2 -->
+                <tr>
+                    <td>
+                        <div>
+                            <div class="fw-bold text-dark">Sara Mohamed</div>
+                            <div class="text-muted small">sara.m@example.com</div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="badge badge-role-customer px-3 py-2 rounded-pill">Customer</span>
+                    </td>
+                    <td>
+                        <span class="badge badge-status-active px-3 py-2 rounded-pill">Active</span>
+                    </td>
+                    <td class="text-end">
+                        <button class="btn btn-outline-primary btn-action btn-sm me-1">
+                            Promote to Admin
+                        </button>
+                        <button class="btn btn-outline-danger btn-action btn-sm">
+                            Lock Account
+                        </button>
+                    </td>
+                </tr>
+
+                <!-- User 3 -->
+                <tr>
+                    <td>
+                        <div>
+                            <div class="fw-bold text-dark">Omar Mahmoud</div>
+                            <div class="text-muted small">omar@example.com</div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="badge badge-role-customer px-3 py-2 rounded-pill">Customer</span>
+                    </td>
+                    <td>
+                        <span class="badge badge-status-locked px-3 py-2 rounded-pill">Locked</span>
+                    </td>
+                    <td class="text-end">
+                        <button class="btn btn-outline-primary btn-action btn-sm me-1">
+                            Promote to Admin
+                        </button>
+                        <button class="btn btn-outline-success btn-action btn-sm">
+                            Unlock Account
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination (Sprint Challenge) -->
+    <nav class="d-flex justify-content-end mt-4">
+        <ul class="pagination pagination-sm mb-0">
+            <li class="page-item disabled">
+                <a class="page-link" href="#">Previous</a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link bg-secondary border-secondary" href="#">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link text-dark" href="#">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link text-dark" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+</main>

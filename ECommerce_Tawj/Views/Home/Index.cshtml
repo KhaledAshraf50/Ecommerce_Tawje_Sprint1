@@ -1,0 +1,127 @@
+﻿@using ECommerce_Tawj.DTOs.HomeDTOs
+@model HomeDTO
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+}
+
+<!-- Hero Slider Section -->
+<section class="container my-4">
+    <div id="heroCarousel" class="carousel slide custom-hero-bg rounded-4 p-4 p-md-5" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            @{
+                int index = 0;
+            }
+            @foreach (var item in Model.HeroDeals)
+            {
+                <div class="carousel-item @(index == 0 ? "active" : "")">
+                    <div class="row align-items-center">
+                        <div class="col-md-7">
+                            <span class="text-orange fw-semibold">Exclusive Deal @item.DiscountPercentage% Off</span>
+                            <h1 class="display-5 fw-bold text-dark my-3">
+                                @item.ProductName
+                            </h1>
+                            <p class="text-muted">@item.ProductDescription</p>
+                            <div class="d-flex align-items-center gap-3 mt-4">
+                                <a href="#Shop" class="btn btn-orange px-4 py-2 rounded-3 text-white fw-semibold">Order Now - $@item.ProductPrice</a>
+                            </div>
+                        </div>
+                        <div class="col-md-5 text-center mt-4 mt-md-0">
+                            <img src="@item.MainImage" class="img-fluid rounded-3" style="max-height: 280px;" alt="@item.ProductName" />
+                        </div>
+                    </div>
+                </div>
+                index++;
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Popular Products Section -->
+<section class="container my-5" id="Shop">
+    <h3 class="fw-bold text-dark mb-4">Popular products</h3>
+    <div class="row g-4">
+        @foreach (var product in Model.PopularProducts)
+        {
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="card h-100 border-0 bg-light rounded-4 p-3 position-relative product-card shadow-sm">
+                    <button class="btn btn-white rounded-circle shadow-sm position-absolute top-0 end-0 m-3 p-1 px-2 border-0 bg-white btn-favorite"
+                            data-product-id="@product.Id">
+                        <i class="@(product.IsFavorite ? "fa-solid text-danger" : "fa-regular text-secondary") fa-heart fs-5"></i>
+                    </button>
+                    <div class="text-center py-3" style="height: 160px;">
+                        <img src="@product.MainImage" class="img-fluid h-100" style="object-fit: contain;" alt="@product.ProductName" />
+                    </div>
+                    <div class="card-body p-0 d-flex flex-column justify-content-end">
+                        <span class="badge bg-secondary mb-1 align-self-start">@product.CategoryName</span>
+                        <h6 class="fw-bold text-dark mb-1 text-truncate">@product.ProductName</h6>
+                        <div class="text-warning small mb-2">
+                            <i class="fa-solid fa-star"></i> @product.AverageRating
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <span class="fw-bold text-dark">$@product.ProductPrice</span>
+                            <button class="btn btn-orange text-white btn-sm rounded-pill px-3">
+                                <i class="fa-solid fa-cart-plus me-1"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="container my-5">
+    <h3 class="fw-bold text-dark mb-4 text-center">Featured Products</h3>
+    <div class="row g-4">
+        @foreach (var item in Model.FeaturedProducts)
+        {
+            <div class="col-md-4">
+                <div class="featured-banner rounded-4 p-4 d-flex flex-column justify-content-end"
+                     style="background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent), url('@item.MainImage'); height: 350px; background-size: cover; background-position: center;">
+                    <h4 class="text-white fw-bold">@item.ProductName</h4>
+                    <p class="text-white-50 small text-truncate">@item.ProductDescription</p>
+                    <a href="#Shop" class="btn btn-orange text-white fit-content rounded-3 px-3">
+                        Buy now - $@item.ProductPrice <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(document).on('click','.btn-favorite',function(e){
+                e.preventDefault();
+                var buuton = $(this);
+                var icon = buuton.find('i');
+                var productId = buuton.data('product-id');
+
+                $.ajax({
+                    url:'/Favorite/ToggleFavorite',
+                    type:'POST',
+                    data:{productId:productId},
+                    success:function(response){
+                        if(response.success){
+                            if(response.isFavorite){
+                                icon.removeClass('fa-regular text-secondary').addClass('fa-solid text-danger');
+                            }
+                            else{
+                                 icon.removeClass('fa-solid text-danger').addClass('fa-regular text-secondary');
+                            }
+                        }
+                    },
+                    error:function(xhr){
+                        if(xhr.status == 401){
+                            window.location.href = '/Account/Login'
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

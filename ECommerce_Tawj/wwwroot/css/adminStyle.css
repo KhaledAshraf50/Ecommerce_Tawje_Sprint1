@@ -1,0 +1,140 @@
+﻿:root {
+    --primary-orange: #f05423;
+    --sidebar-active-bg: #fdf3f0;
+}
+
+body {
+    background-color: #f8f9fa;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    /* مساحة سفليّة عشان المحتوى ما يختفيش ورا القائمة على الموبايل */
+    padding-bottom: 70px;
+}
+
+@media (min-width: 992px) {
+    body {
+        padding-bottom: 0; /* إلغاء المساحة في شاشات الكمبيوتر */
+    }
+}
+
+.admin-nav {
+    height: 70px;
+    border-bottom: 1px solid #e9ecef;
+    background: #fff;
+}
+
+/* ==========================================
+   📱 App Bottom Navigation (للموبايل) 
+   & Desktop Sidebar (للكمبيوتر)
+   ========================================== */
+
+/* 1. الشاشات الكبيرة (Desktop) */
+@media (min-width: 992px) {
+    .sidebar {
+        width: 250px;
+        min-height: calc(100vh - 70px);
+        border-right: 1px solid #e9ecef;
+        background: #fff;
+        flex-shrink: 0;
+        position: relative;
+    }
+
+    .sidebar-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 24px;
+        color: #495057;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .sidebar-link.active {
+            background-color: var(--sidebar-active-bg);
+            color: #212529;
+            border-right: 4px solid var(--primary-orange);
+        }
+
+        .sidebar-link span {
+            display: inline; /* إظهار الأسماء في الكمبيوتر */
+        }
+}
+
+@media (max-width: 991.98px) {
+    .sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 65px;
+        background: #ffffff;
+        border-top: 1px solid #e9ecef;
+        display: flex !important;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0 !important;
+        z-index: 1050; /* لتكون فوق كل العناصر */
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .sidebar-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        padding: 6px 0;
+        color: #6c757d;
+        text-decoration: none;
+        font-size: 0.72rem;
+        font-weight: 600;
+        flex: 1;
+        text-align: center;
+    }
+
+        .sidebar-link i {
+            font-size: 1.25rem;
+        }
+
+        .sidebar-link.active {
+            color: var(--primary-orange);
+            background-color: transparent;
+            border-right: none;
+        }
+
+        .sidebar-link span {
+            display: block; /* إظهار الكلام تحت الأيقونة زي الأبلكيشن */
+        }
+
+    main {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 15px !important;
+    }
+}
+
+
+.stat-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table {
+    white-space: nowrap;
+}

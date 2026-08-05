@@ -1,0 +1,14 @@
+﻿.btn-orange {
+    background-color: var(--primary-orange);
+    color: white;
+    border: none;
+}
+
+    .btn-orange:hover {
+        background-color: #d84315;
+        color: white;
+    }
+.table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}

@@ -1,0 +1,21 @@
+﻿.order-card {
+    border-bottom: 1px solid #e9ecef;
+    padding: 20px 0;
+}
+
+    .order-card:last-child {
+        border-bottom: none;
+    }
+
+.order-icon-box {
+    width: 55px;
+    height: 55px;
+    background-color: #fde8e3;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-orange);
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}

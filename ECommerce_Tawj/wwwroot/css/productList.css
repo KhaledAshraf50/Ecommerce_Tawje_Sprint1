@@ -1,0 +1,59 @@
+﻿.product-table {
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+    .product-table th {
+        background-color: #ffffff;
+        color: #212529;
+        font-weight: 600;
+        padding: 16px;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .product-table td {
+        padding: 16px;
+        vertical-align: middle;
+        color: #495057;
+        border-bottom: 1px solid #f1f3f5;
+    }
+
+.product-img-box {
+    width: 45px;
+    height: 45px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .product-img-box img {
+        max-width: 35px;
+        max-height: 35px;
+        object-fit: contain;
+    }
+
+.btn-visit {
+    background-color: var(--primary-orange);
+    color: white;
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 6px 18px;
+    border: none;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+
+    .btn-visit:hover {
+        background-color: #d84315;
+        color: white;
+    }
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
