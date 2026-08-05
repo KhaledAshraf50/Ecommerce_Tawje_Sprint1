@@ -244,3 +244,4 @@ D:\Tawje\ECommerce_Tawj\ECommerce_Tawj\bin\Debug\net9.0\AutoMapper.Extensions.Mi
 D:\Tawje\ECommerce_Tawj\ECommerce_Tawj\obj\Debug\net9.0\compressed\fssfgk074c-{0}-1eerhs3khg-1eerhs3khg.gz
 D:\Tawje\ECommerce_Tawj\ECommerce_Tawj\obj\Debug\net9.0\compressed\kpk5lfx7l6-{0}-b7po9hqfpb-b7po9hqfpb.gz
 D:\Tawje\ECommerce_Tawj\ECommerce_Tawj\obj\Debug\net9.0\compressed\73wqcgcbhx-{0}-jdndwnnnae-jdndwnnnae.gz
+D:\Tawje\ECommerce_Tawj\ECommerce_Tawj\obj\Debug\net9.0\ECommerce_Tawj.sourcelink.json

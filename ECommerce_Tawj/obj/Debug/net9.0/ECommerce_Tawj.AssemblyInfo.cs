@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ECommerce_Tawj")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ecddd13b74bfbde00d64263fc95f61678044533d")]
 [assembly: System.Reflection.AssemblyProductAttribute("ECommerce_Tawj")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ECommerce_Tawj")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

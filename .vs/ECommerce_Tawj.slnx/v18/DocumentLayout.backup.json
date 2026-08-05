@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\Tawje\\ECommerce_Tawj\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{34491EE7-9BD0-4B3B-61EC-ED3FEF245B60}|ECommerce_Tawj\\ECommerce_Tawj.csproj|d:\\tawje\\ecommerce_tawj\\ecommerce_tawj\\dtos\\accountdtos\\loginuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34491EE7-9BD0-4B3B-61EC-ED3FEF245B60}|ECommerce_Tawj\\ECommerce_Tawj.csproj|solutionrelative:ecommerce_tawj\\dtos\\accountdtos\\loginuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{34491EE7-9BD0-4B3B-61EC-ED3FEF245B60}|ECommerce_Tawj\\ECommerce_Tawj.csproj|d:\\tawje\\ecommerce_tawj\\ecommerce_tawj\\views\\product\\productdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{34491EE7-9BD0-4B3B-61EC-ED3FEF245B60}|ECommerce_Tawj\\ECommerce_Tawj.csproj|solutionrelative:ecommerce_tawj\\views\\product\\productdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -127,10 +131,6 @@
       "RelativeMoniker": "D:0:0:{34491EE7-9BD0-4B3B-61EC-ED3FEF245B60}|ECommerce_Tawj\\ECommerce_Tawj.csproj|solutionrelative:ecommerce_tawj\\services\\accountservices\\implement\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{34491EE7-9BD0-4B3B-61EC-ED3FEF245B60}|ECommerce_Tawj\\ECommerce_Tawj.csproj|d:\\tawje\\ecommerce_tawj\\ecommerce_tawj\\dtos\\accountdtos\\loginuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34491EE7-9BD0-4B3B-61EC-ED3FEF245B60}|ECommerce_Tawj\\ECommerce_Tawj.csproj|solutionrelative:ecommerce_tawj\\dtos\\accountdtos\\loginuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{34491EE7-9BD0-4B3B-61EC-ED3FEF245B60}|ECommerce_Tawj\\ECommerce_Tawj.csproj|d:\\tawje\\ecommerce_tawj\\ecommerce_tawj\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{34491EE7-9BD0-4B3B-61EC-ED3FEF245B60}|ECommerce_Tawj\\ECommerce_Tawj.csproj|solutionrelative:ecommerce_tawj\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -206,11 +206,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "ProductService.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Services\\ProductServices\\Implement\\ProductService.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Services\\ProductServices\\Implement\\ProductService.cs",
@@ -219,8 +219,7 @@
               "ViewState": "AgIAABgAAAAAAAAAAAA1wGYAAABgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-02T12:36:24.122Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -232,20 +231,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IProductService.cs",
-              "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Services\\ProductServices\\Interfaces\\IProductService.cs",
-              "RelativeDocumentMoniker": "ECommerce_Tawj\\Services\\ProductServices\\Interfaces\\IProductService.cs",
-              "ToolTip": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Services\\ProductServices\\Interfaces\\IProductService.cs",
-              "RelativeToolTip": "ECommerce_Tawj\\Services\\ProductServices\\Interfaces\\IProductService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-04T22:03:17.537Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ProductController.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Controllers\\ProductController.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Controllers\\ProductController.cs",
@@ -253,25 +239,24 @@
               "RelativeToolTip": "ECommerce_Tawj\\Controllers\\ProductController.cs",
               "ViewState": "AgIAAB8AAAAAAAAAAADwvzcAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-01T17:55:18.153Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-01T17:55:18.153Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ProductDetails.cshtml",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Views\\Product\\ProductDetails.cshtml",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Views\\Product\\ProductDetails.cshtml",
               "ToolTip": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Views\\Product\\ProductDetails.cshtml",
               "RelativeToolTip": "ECommerce_Tawj\\Views\\Product\\ProductDetails.cshtml",
-              "ViewState": "AgIAAIcAAAAAAAAAAAAAAKEAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKEAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-08-04T21:58:27.554Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "ProductRepo.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Reposatory\\Implemention\\ProductRepo.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Reposatory\\Implemention\\ProductRepo.cs",
@@ -279,12 +264,11 @@
               "RelativeToolTip": "ECommerce_Tawj\\Reposatory\\Implemention\\ProductRepo.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-01T18:03:47.135Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-01T18:03:47.135Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "IProductRepo.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Reposatory\\Interfaces\\IProductRepo.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Reposatory\\Interfaces\\IProductRepo.cs",
@@ -292,12 +276,36 @@
               "RelativeToolTip": "ECommerce_Tawj\\Reposatory\\Interfaces\\IProductRepo.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-01T18:02:37.023Z",
+              "WhenOpened": "2026-08-01T18:02:37.023Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LoginUserDTO.cs",
+              "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\DTOs\\AccountDTOs\\LoginUserDTO.cs",
+              "RelativeDocumentMoniker": "ECommerce_Tawj\\DTOs\\AccountDTOs\\LoginUserDTO.cs",
+              "ToolTip": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\DTOs\\AccountDTOs\\LoginUserDTO.cs",
+              "RelativeToolTip": "ECommerce_Tawj\\DTOs\\AccountDTOs\\LoginUserDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-03T16:55:11.768Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
+              "Title": "IProductService.cs",
+              "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Services\\ProductServices\\Interfaces\\IProductService.cs",
+              "RelativeDocumentMoniker": "ECommerce_Tawj\\Services\\ProductServices\\Interfaces\\IProductService.cs",
+              "ToolTip": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Services\\ProductServices\\Interfaces\\IProductService.cs",
+              "RelativeToolTip": "ECommerce_Tawj\\Services\\ProductServices\\Interfaces\\IProductService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-04T22:03:17.537Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "ProductDetailsDTO.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\DTOs\\ProductsDTOs\\ProductDetailsDTO.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\DTOs\\ProductsDTOs\\ProductDetailsDTO.cs",
@@ -305,12 +313,11 @@
               "RelativeToolTip": "ECommerce_Tawj\\DTOs\\ProductsDTOs\\ProductDetailsDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-04T22:28:40.227Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-04T22:28:40.227Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "ProductImageDTO.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\DTOs\\ProductsDTOs\\ProductImageDTO.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\DTOs\\ProductsDTOs\\ProductImageDTO.cs",
@@ -318,12 +325,11 @@
               "RelativeToolTip": "ECommerce_Tawj\\DTOs\\ProductsDTOs\\ProductImageDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-04T22:31:14.145Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-04T22:31:14.145Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "MappingProfile.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Profiles\\MappingProfile.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Profiles\\MappingProfile.cs",
@@ -331,12 +337,11 @@
               "RelativeToolTip": "ECommerce_Tawj\\Profiles\\MappingProfile.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAAC8AAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-04T22:31:45.568Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-04T22:31:45.568Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Product.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Models\\Product.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Models\\Product.cs",
@@ -344,12 +349,11 @@
               "RelativeToolTip": "ECommerce_Tawj\\Models\\Product.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-04T22:26:02.624Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-04T22:26:02.624Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "ProductDTO.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\DTOs\\ProductsDTOs\\ProductDTO.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\DTOs\\ProductsDTOs\\ProductDTO.cs",
@@ -357,12 +361,11 @@
               "RelativeToolTip": "ECommerce_Tawj\\DTOs\\ProductsDTOs\\ProductDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-01T18:11:05.158Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-01T18:11:05.158Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Views\\Product\\Index.cshtml",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Views\\Product\\Index.cshtml",
@@ -370,12 +373,11 @@
               "RelativeToolTip": "ECommerce_Tawj\\Views\\Product\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAABwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-08-01T17:57:14.055Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-01T17:57:14.055Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "CategoryController.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Controllers\\CategoryController.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Controllers\\CategoryController.cs",
@@ -383,12 +385,11 @@
               "RelativeToolTip": "ECommerce_Tawj\\Controllers\\CategoryController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-02T14:49:00.045Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-02T14:49:00.045Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "FavoriteController.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Controllers\\FavoriteController.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Controllers\\FavoriteController.cs",
@@ -396,12 +397,11 @@
               "RelativeToolTip": "ECommerce_Tawj\\Controllers\\FavoriteController.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAcwBEAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-04T11:26:24.624Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-04T11:26:24.624Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "ProductsHomeDTO.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\DTOs\\ProductsDTOs\\ProductsHomeDTO.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\DTOs\\ProductsDTOs\\ProductsHomeDTO.cs",
@@ -413,7 +413,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "FavoriteService.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Services\\FavoriteService\\Implement\\FavoriteService.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Services\\FavoriteService\\Implement\\FavoriteService.cs",
@@ -425,7 +425,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "HomeController.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Controllers\\HomeController.cs",
@@ -437,7 +437,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Views\\Favorite\\Index.cshtml",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Views\\Favorite\\Index.cshtml",
@@ -449,7 +449,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "FavoriteRepo.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Reposatory\\Implemention\\FavoriteRepo.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Reposatory\\Implemention\\FavoriteRepo.cs",
@@ -461,7 +461,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "HomeDTO.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\DTOs\\HomeDTOs\\HomeDTO.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\DTOs\\HomeDTOs\\HomeDTO.cs",
@@ -473,7 +473,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "GenricRepo.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Reposatory\\Implemention\\GenricRepo.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Reposatory\\Implemention\\GenricRepo.cs",
@@ -485,7 +485,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Views\\Home\\Index.cshtml",
@@ -497,7 +497,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Views\\Shared\\_Layout.cshtml",
@@ -509,7 +509,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Program.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Program.cs",
@@ -521,7 +521,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "CategoryRepo.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Reposatory\\Implemention\\CategoryRepo.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Reposatory\\Implemention\\CategoryRepo.cs",
@@ -533,7 +533,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "IFavoriteRepo.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Reposatory\\Interfaces\\IFavoriteRepo.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Reposatory\\Interfaces\\IFavoriteRepo.cs",
@@ -545,7 +545,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "IGenricRepo.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Reposatory\\Interfaces\\IGenricRepo.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Reposatory\\Interfaces\\IGenricRepo.cs",
@@ -557,7 +557,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Models\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Models\\Data\\ApplicationDbContext.cs",
@@ -569,7 +569,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "AccountController.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Controllers\\AccountController.cs",
@@ -581,7 +581,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "CreateProductDTO.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\DTOs\\ProductsDTOs\\CreateProductDTO.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\DTOs\\ProductsDTOs\\CreateProductDTO.cs",
@@ -629,7 +629,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "AccountService.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Services\\AccountServices\\Implement\\AccountService.cs",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Services\\AccountServices\\Implement\\AccountService.cs",
@@ -638,18 +638,6 @@
               "ViewState": "AgIAACEAAAAAAAAAAAAYwDEAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-03T14:53:41.5Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "LoginUserDTO.cs",
-              "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\DTOs\\AccountDTOs\\LoginUserDTO.cs",
-              "RelativeDocumentMoniker": "ECommerce_Tawj\\DTOs\\AccountDTOs\\LoginUserDTO.cs",
-              "ToolTip": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\DTOs\\AccountDTOs\\LoginUserDTO.cs",
-              "RelativeToolTip": "ECommerce_Tawj\\DTOs\\AccountDTOs\\LoginUserDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-03T16:55:11.768Z"
             },
             {
               "$type": "Document",
