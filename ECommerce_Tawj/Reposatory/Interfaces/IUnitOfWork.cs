@@ -8,7 +8,8 @@ namespace ECommerce_Tawj.Reposatory.Interfaces
         IGenricRepo<ProductImage> ProductImageRepo { get; }
         ICategoryRepo CategoryRepo { get; }
         IFavoriteRepo FavoriteRepo { get; }
-
+        ICartRepo CartRepo { get; }
+        IOrderRepo OrderRepo { get; }
         Task<int> SaveChangesAsync();
     }
 }

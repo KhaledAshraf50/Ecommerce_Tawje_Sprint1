@@ -1,12 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ECommerce_Tawj.Services.AdminServices.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce_Tawj.Controllers
 {
     public class AdminController : Controller
     {
-        public IActionResult Index()
+        private readonly IAdminService _adminService;
+        public AdminController(IAdminService adminService)
         {
-            return View();
+            _adminService = adminService;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var dashboardData = await _adminService.GetDashboardDataAsync();
+            return View(dashboardData);
         }
     }
 }

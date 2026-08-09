@@ -1,0 +1,121 @@
+﻿@using ECommerce_Tawj.DTOs.CartItemDTOs
+@model CartDTO
+
+@{
+    ViewData["Title"] = "Shopping Cart";
+    Layout = "_Layout";
+}
+
+<section class="container my-5">
+    <div class="d-flex align-items-center justify-content-between mb-4 border-bottom pb-3">
+        <div>
+            <h2 class="fw-bold text-dark m-0">
+                <i class="fa-solid fa-cart-shopping text-orange me-2" style="color: #ff5722;"></i>My Shopping Cart
+            </h2>
+            <p class="text-muted small mb-0 mt-1">Review your items before proceeding to checkout</p>
+        </div>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary rounded-3 btn-sm">
+            <i class="fa-solid fa-arrow-left me-1"></i> Continue Shopping
+        </a>
+    </div>
+
+    @if (Model.Items != null && Model.Items.Any())
+    {
+        <div class="row g-4">
+            <!-- Cart Items List -->
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm rounded-4 bg-white p-3 p-md-4">
+                    <div class="table-responsive">
+                        <table class="table align-middle border-0 mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th class="text-end">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Items)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <img src="@item.MainImage" class="rounded-3" style="width: 65px; height: 65px; object-fit: contain; background: #f8f9fa; padding: 5px;" alt="@item.ProductName" />
+                                                <div>
+                                                    <h6 class="fw-bold text-dark mb-0">@item.ProductName</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="fw-semibold text-dark">$@item.ProductPrice.ToString("F2")</td>
+                                        <td>
+                                            <form asp-controller="Cart" asp-action="UpdateQuantity" method="post" class="d-flex align-items-center gap-1" style="max-width: 120px;">
+                                                <input type="hidden" name="cartItemId" value="@item.Id" />
+                                                <button type="submit" name="quantity" value="@(item.Quantity - 1)" class="btn btn-sm btn-outline-secondary px-2">-</button>
+                                                <input type="text" class="form-control form-control-sm text-center fw-bold" value="@item.Quantity" readonly />
+                                                <button type="submit" name="quantity" value="@(item.Quantity + 1)" class="btn btn-sm btn-outline-secondary px-2">+</button>
+                                            </form>
+                                        </td>
+                                        <td class="fw-bold text-dark">$@item.TotalPrice.ToString("F2")</td>
+                                        <td class="text-end">
+                                            <form asp-controller="Cart" asp-action="Remove" method="post" class="d-inline">
+                                                <input type="hidden" name="cartItemId" value="@item.Id" />
+                                                <button type="submit" class="btn btn-sm btn-outline-danger rounded-circle p-2" title="Remove Item">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 bg-white p-4">
+                    <h5 class="fw-bold text-dark mb-3 border-bottom pb-2">Order Summary</h5>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Subtotal</span>
+                        <span class="fw-bold text-dark">$@Model.SubTotal.ToString("F2")</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="text-muted">Estimated Shipping</span>
+                        <span class="fw-bold text-dark">$@Model.ShippingFee.ToString("F2")</span>
+                    </div>
+
+                    <hr />
+
+                    <div class="d-flex justify-content-between mb-4">
+                        <span class="fw-bold fs-5 text-dark">Total</span>
+                        <span class="fw-bold fs-4 text-dark" style="color: #ff5722 !important;">$@Model.GrandTotal.ToString("F2")</span>
+                    </div>
+
+                    <a asp-action="CheckOut" asp-controller="Order"
+                        class="btn w-100 py-2.5 rounded-3 text-white fw-bold shadow-sm" style="background-color: #ff5722;">
+                        Proceed to Checkout <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Empty Cart State -->
+        <div class="text-center py-5 my-5">
+            <div class="mb-3">
+                <i class="fa-solid fa-basket-shopping display-1 text-muted opacity-50"></i>
+            </div>
+            <h4 class="fw-bold text-dark">Your Cart is Currently Empty</h4>
+            <p class="text-muted small mb-4">Looks like you haven't added anything to your cart yet.</p>
+            <a asp-controller="Home" asp-action="Index" class="btn text-white px-4 py-2 rounded-3 fw-semibold" style="background-color: #ff5722;">
+                Start Shopping Now
+            </a>
+        </div>
+    }
+</section>

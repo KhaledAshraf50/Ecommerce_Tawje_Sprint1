@@ -8,9 +8,10 @@
         public decimal Price { get; set; }
         public int DiscountPercentage { get; set; }
 
-        public decimal finalProce => DiscountPercentage > 0
+        public decimal FinalPrice => (DiscountPercentage > 0 && DiscountPercentage <= 100)
             ? Price - (Price * DiscountPercentage / 100m)
             : Price;
+
         public string Brand { get; set; } = string.Empty;
         public double AverageRating { get; set; }
         public string CategoryName { get; set; } = string.Empty;

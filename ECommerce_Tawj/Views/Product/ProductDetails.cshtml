@@ -117,14 +117,15 @@
             </div>
 
             <!-- Pricing -->
-            <div class="d-flex align-items-center gap-3 my-3">
-                <h3 class="fw-bold text-dark mb-0">$@Model.finalProce.ToString("F2")</h3>
-                @if (Model.DiscountPercentage > 0)
-                {
-                    <span class="text-decoration-line-through text-muted">$@Model.Price.ToString("F2")</span>
-                    <span class="badge bg-danger">@Model.DiscountPercentage% OFF</span>
-                }
-            </div>
+                <div class="d-flex align-items-center gap-3 my-3">
+                    <h3 class="fw-bold text-dark mb-0">$@Model.FinalPrice.ToString("F2")</h3>
+
+                    @if (Model.DiscountPercentage > 0 && Model.DiscountPercentage <= 100)
+                    {
+                        <span class="text-decoration-line-through text-muted">$@Model.Price.ToString("F2")</span>
+                        <span class="badge bg-danger">@Model.DiscountPercentage% OFF</span>
+                    }
+                </div>
 
             <!-- Description -->
             <p class="text-muted leading-relaxed">

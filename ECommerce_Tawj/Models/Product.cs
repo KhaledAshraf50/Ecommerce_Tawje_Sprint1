@@ -14,7 +14,7 @@ namespace ECommerce_Tawj.Models
         public string Description { get; set; } = string.Empty;
         [Column(TypeName = "decimal(18,2)")]// Specify the precision and scale for the Price property
         public decimal Price { get; set; }
-
+        [Range(0, 100, ErrorMessage = "Discount percentage must be between 0 and 100.")]
         public int DiscountPercentage { get; set; } = 0;
 
         public int StockQuantity { get; set; } = 0;

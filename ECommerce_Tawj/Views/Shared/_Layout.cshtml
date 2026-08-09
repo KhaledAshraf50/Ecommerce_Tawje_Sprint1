@@ -1,6 +1,20 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@using ECommerce_Tawj.Services.CartServices.Interfaces
+@using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> _signInManager
 @inject UserManager<ApplicationUser> _userManager
+@inject ICartService _cartService
+
+@{
+    int cartCount = 0;
+    if (_signInManager.IsSignedIn(User))
+    {
+        var userId = _userManager.GetUserId(User);
+        if (!string.IsNullOrEmpty(userId))
+        {
+            cartCount = await _cartService.GetCartCountAsync(userId);
+        }
+    }
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +65,7 @@
                             <a asp-controller="Cart" asp-action="Index" class="btn btn-light rounded-circle position-relative p-2">
                                 <i class="fa-solid fa-cart-shopping fs-5 text-dark"></i>
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    3
+                                    @cartCount
                                 </span>
                             </a>
 

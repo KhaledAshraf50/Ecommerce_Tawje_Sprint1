@@ -4,14 +4,21 @@ using ECommerce_Tawj.Reposatory.Implemention;
 using ECommerce_Tawj.Reposatory.Interfaces;
 using ECommerce_Tawj.Services.AccountServices.Implement;
 using ECommerce_Tawj.Services.AccountServices.Interfaces;
+using ECommerce_Tawj.Services.AdminServices.Implement;
+using ECommerce_Tawj.Services.AdminServices.Interfaces;
+using ECommerce_Tawj.Services.CartServices.Implement;
+using ECommerce_Tawj.Services.CartServices.Interfaces;
 using ECommerce_Tawj.Services.CategoryServices.Implement;
 using ECommerce_Tawj.Services.CategoryServices.Interfaces;
 using ECommerce_Tawj.Services.FavoriteService.Implement;
 using ECommerce_Tawj.Services.FavoriteService.Interface;
+using ECommerce_Tawj.Services.OrderServices.Implement;
+using ECommerce_Tawj.Services.OrderServices.Interfaces;
 using ECommerce_Tawj.Services.ProductServices.Implement;
 using ECommerce_Tawj.Services.ProductServices.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,15 +38,20 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
+// add Stripe Service
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 // regester the UnitOfWork 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Add AutoMapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 // add services 
-builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductService, ProductServices>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IAccountService, AccountServices>();
 builder.Services.AddScoped<IFavoriteService, FavoriteService>();
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
 
 
 var app = builder.Build();
