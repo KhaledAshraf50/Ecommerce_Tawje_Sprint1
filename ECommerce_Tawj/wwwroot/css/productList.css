@@ -57,3 +57,8 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }
+.desc{
+    max-width:200px;
+    display:flex;
+    overflow-x:auto;
+}

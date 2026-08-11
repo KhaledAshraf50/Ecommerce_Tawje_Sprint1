@@ -1,4 +1,6 @@
-﻿@{
+﻿@using ECommerce_Tawj.DTOs.UserDTOs
+@model UserListDTO
+@{
 
     ViewData["Title"] = "Product List";
     Layout = "_AdminLayout";
@@ -11,14 +13,19 @@
         <h4 class="fw-bold text-dark mb-0">Users Management</h4>
 
         <!-- Search Box (Sprint Challenge) -->
-        <div class="input-group style-search" style="max-width: 300px">
-            <span class="input-group-text bg-white border-end-0">
-                <i class="fa-solid fa-magnifying-glass text-muted"></i>
-            </span>
-            <input type="text"
-                   class="form-control border-start-0"
-                   placeholder="Search user or email..." />
-        </div>
+        <form asp-controller="User" asp-action="Index" method="get" class="d-inline">
+            <div class="input-group style-search" style="max-width: 300px">
+                <span class="input-group-text bg-white border-end-0">
+                    <i class="fa-solid fa-magnifying-glass text-muted"></i>
+                </span>
+                <input type="text"
+                       name="searchTerm"
+                       value="@Model.SearchTerm"
+                       class="form-control border-start-0"
+                       placeholder="Search user or email..."
+                       onchange="this.form.submit()"/>
+            </div>
+        </form>
     </div>
 
     <!-- Table -->
@@ -33,96 +40,123 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- User 1 -->
-                <tr>
-                    <td>
-                        <div>
-                            <div class="fw-bold text-dark">Ahmed Ali</div>
-                            <div class="text-muted small">ahmed.ali@example.com</div>
-                        </div>
-                    </td>
-                    <td>
-                        <span class="badge badge-role-admin px-3 py-2 rounded-pill">Admin</span>
-                    </td>
-                    <td>
-                        <span class="badge badge-status-active px-3 py-2 rounded-pill">Active</span>
-                    </td>
-                    <td class="text-end">
-                        <button class="btn btn-outline-warning btn-action btn-sm me-1">
-                            Demote to Customer
-                        </button>
-                        <button class="btn btn-outline-danger btn-action btn-sm">
-                            Lock Account
-                        </button>
-                    </td>
-                </tr>
+                @if(Model.Users != null && Model.Users.Any())
+                {
+                    @foreach(var user in Model.Users)
+                    {
+                        <tr>
+                            <td>
+                                <div>
+                                    <div class="fw-bold text-dark">@user.FullName</div>
+                                    <div class="text-muted small">@user.Email</div>
+                                </div>
+                            </td>
+                            <td>
+                                @if(user.Role == "Admin")
+                                {
+                                    <span class="badge badge-role-admin px-3 py-2 rounded-pill">Admin</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-role-customer px-3 py-2 rounded-pill">Customer</span>
+                                }
+                            </td>
+                            <td>
+                                @if (user.IsLocked)
+                                {
+                                    <span class="badge badge-status-locked px-3 py-2 rounded-pill">Locked</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-status-active px-3 py-2 rounded-pill">Active</span>
+                                }
+                            </td>
+                            <td class="text-end">
+                                <div class="d-inline">
+                                    <form asp-controller="User" asp-action="ToggleRole" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="userId" value="@user.Id" />
+                                        <input type="hidden" name="searchTerm" value="@Model.SearchTerm" />
+                                        <input type="hidden" name="pageNumber" value="@Model.PageNumber" />
+                                        @if (user.Role == "Admin")
+                                        {
+                                            <button type="submit" class="btn btn-outline-warning btn-action btn-sm">
+                                                Demote to Customer
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="submit" class="btn btn-outline-primary btn-action btn-sm">
+                                                Promote to Admin
+                                            </button>
+                                        }
+                                    </form>
+                                    <form asp-controller="User" asp-action="ToggleLock" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="userId" value="@user.Id" />
+                                        <input type="hidden" name="searchTerm" value="@Model.SearchTerm" />
+                                        <input type="hidden" name="pageNumber" value="@Model.PageNumber" />
 
-                <!-- User 2 -->
-                <tr>
-                    <td>
-                        <div>
-                            <div class="fw-bold text-dark">Sara Mohamed</div>
-                            <div class="text-muted small">sara.m@example.com</div>
-                        </div>
-                    </td>
-                    <td>
-                        <span class="badge badge-role-customer px-3 py-2 rounded-pill">Customer</span>
-                    </td>
-                    <td>
-                        <span class="badge badge-status-active px-3 py-2 rounded-pill">Active</span>
-                    </td>
-                    <td class="text-end">
-                        <button class="btn btn-outline-primary btn-action btn-sm me-1">
-                            Promote to Admin
-                        </button>
-                        <button class="btn btn-outline-danger btn-action btn-sm">
-                            Lock Account
-                        </button>
-                    </td>
-                </tr>
-
-                <!-- User 3 -->
-                <tr>
-                    <td>
-                        <div>
-                            <div class="fw-bold text-dark">Omar Mahmoud</div>
-                            <div class="text-muted small">omar@example.com</div>
-                        </div>
-                    </td>
-                    <td>
-                        <span class="badge badge-role-customer px-3 py-2 rounded-pill">Customer</span>
-                    </td>
-                    <td>
-                        <span class="badge badge-status-locked px-3 py-2 rounded-pill">Locked</span>
-                    </td>
-                    <td class="text-end">
-                        <button class="btn btn-outline-primary btn-action btn-sm me-1">
-                            Promote to Admin
-                        </button>
-                        <button class="btn btn-outline-success btn-action btn-sm">
-                            Unlock Account
-                        </button>
-                    </td>
-                </tr>
+                                        @if (user.IsLocked)
+                                        {
+                                            <button type="submit" class="btn btn-outline-success btn-action btn-sm">
+                                                Unlock Account
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="submit" class="btn btn-outline-danger btn-action btn-sm">
+                                                Lock Account
+                                            </button>
+                                        }
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="text-center py-4 text-muted">
+                            No users found matching your search.
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
 
-    <!-- Pagination (Sprint Challenge) -->
-    <nav class="d-flex justify-content-end mt-4">
-        <ul class="pagination pagination-sm mb-0">
-            <li class="page-item disabled">
-                <a class="page-link" href="#">Previous</a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link bg-secondary border-secondary" href="#">1</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link text-dark" href="#">2</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link text-dark" href="#">Next</a>
-            </li>
-        </ul>
-    </nav>
+    @if(Model.TotalPages > 1)
+    {
+        <nav class="d-flex justify-content-end mt-4">
+            <ul class="pagination pagination-sm mb-0">
+                <li class="page-item @(!Model.HasPreviousPage ? "disabled": "")">
+                    <a class="page-link"
+                    asp-controller="User"
+                    asp-action="Index"
+                    asp-route-searchTerm="@Model.SearchTerm"
+                    asp-route-pageNumber="@(Model.PageNumber-1)">Previous</a>
+                </li>
+                @for(int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.PageNumber ? "active":"")">
+                        <a class="page-link @(i == Model.PageNumber ? "bg-secondary border-secondary" : "text-dark") "
+                           asp-controller="User"
+                           asp-action="Index"
+                           asp-route-searchTerm="@Model.SearchTerm"
+                           asp-route-pageNumber="@i">@i</a>
+                    </li>
+                }
+                <li class="page-item @(!Model.HasNextPage ? "disabled" : "")">
+                    <a class="page-link"
+                       asp-controller="User"
+                       asp-action="Index"
+                       asp-route-searchTerm="@Model.SearchTerm"
+                       asp-route-pageNumber="@(Model.PageNumber + 1)">Next</a>
+                </li>
+            </ul>
+        </nav>
+    }
+
 </main>

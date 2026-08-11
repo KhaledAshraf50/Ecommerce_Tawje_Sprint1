@@ -24,5 +24,14 @@ namespace ECommerce_Tawj.Reposatory.Implemention
                 .AsNoTracking()
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<Order>> GetOrdersByUserIdAsync(string userId)
+        {
+            return await _context.Orders
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Product)
+                .Where(o => o.UserId == userId)
+                .ToListAsync();
+        }
     }
 }

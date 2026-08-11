@@ -28,5 +28,29 @@ namespace ECommerce_Tawj.Services.CategoryServices.Implement
             var categories = await _unitOfWork.CategoryRepo.GetCategoriesWithProductsAsync();
             return _mapper.Map<IEnumerable<CategoryDTO>>(categories);
         }
+        public async Task<CategoryDTO?> GetCategoryByIdAsync(int id)
+        {
+            var category = await _unitOfWork.CategoryRepo.GetByIdAsync(id);
+            return category == null ? null : _mapper.Map<CategoryDTO>(category);
+        }
+        public async Task UpdateCategoryAsync(CategoryDTO categoryDto)
+        {
+            var category = await _unitOfWork.CategoryRepo.GetByIdAsync(categoryDto.Id);
+            if (category != null)
+            {
+                _mapper.Map(categoryDto, category);
+                _unitOfWork.CategoryRepo.Update(category);
+                await _unitOfWork.SaveChangesAsync();
+            }
+        }
+        public async Task<bool> DeleteCategoryAsync(int id)
+        {
+            var category = await _unitOfWork.CategoryRepo.GetByIdAsync(id);
+            if (category == null) return false;
+
+            await _unitOfWork.CategoryRepo.DeleteAsync(id);
+            await _unitOfWork.SaveChangesAsync();
+            return true;
+        }
     }
 }

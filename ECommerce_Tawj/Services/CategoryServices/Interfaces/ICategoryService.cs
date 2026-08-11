@@ -7,5 +7,8 @@ namespace ECommerce_Tawj.Services.CategoryServices.Interfaces
     {
         Task<IEnumerable<CategoryDTO>> GetAllCategoriesAsync();
         Task AddCategoryAsync(AddCategoryDTO model);
+        Task<CategoryDTO?> GetCategoryByIdAsync(int id);
+        Task UpdateCategoryAsync(CategoryDTO categoryDto);
+        Task<bool> DeleteCategoryAsync(int id);
     }
 }

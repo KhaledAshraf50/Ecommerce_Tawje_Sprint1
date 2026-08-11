@@ -1,0 +1,71 @@
+﻿@using ECommerce_Tawj.DTOs.OrdersDTOs
+@model IEnumerable<UserOrderDTO>
+
+@{
+    ViewData["Title"] = "My Orders";
+    Layout = "_Layout";
+}
+
+<div class="container py-5">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div>
+            <h3 class="fw-bold text-dark mb-1">My Orders</h3>
+            <p class="text-muted small mb-0">Track and manage your order history</p>
+        </div>
+        <a asp-controller="Product" asp-action="AllProduct" class="btn btn-outline-dark rounded-3 btn-sm">
+            <i class="fa-solid fa-arrow-left me-1"></i> Continue Shopping
+        </a>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row g-3">
+            @foreach (var order in Model)
+            {
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center border-bottom pb-3 mb-3 gap-2">
+                            <div>
+                                <span class="fw-bold text-dark fs-5">#ORD-@order.Id</span>
+                                <span class="text-muted small ms-2">
+                                    <i class="fa-regular fa-calendar me-1"></i>@order.OrderDate.ToString("MMM dd, yyyy")
+                                </span>
+                            </div>
+                            <div>
+                                <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill">
+                                    @order.Status
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row g-3 align-items-center">
+                            <div class="col-md-5">
+                                <p class="text-muted small mb-1">Items Summary (@order.ItemsCount items)</p>
+                                <p class="fw-medium text-dark mb-0">@order.ItemsSummary</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="text-muted small mb-1">Shipping Address</p>
+                                <p class="fw-medium text-dark mb-0">@order.ShippingAddress</p>
+                            </div>
+                            <div class="col-md-3 text-md-end">
+                                <p class="text-muted small mb-1">Total Amount</p>
+                                <h4 class="fw-bold text-danger mb-0">$@order.TotalAmount.ToString("F2")</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5 bg-white rounded-4 shadow-sm border">
+            <i class="fa-solid fa-bag-shopping display-1 text-muted mb-3 opacity-50"></i>
+            <h5 class="fw-bold text-dark">No orders found</h5>
+            <p class="text-muted small mb-4">You haven't placed any orders yet.</p>
+            <a asp-controller="Product" asp-action="Index" class="btn text-white rounded-3 px-4" style="background-color: #ff5722;">
+                Start Shopping Now
+            </a>
+        </div>
+    }
+</div>

@@ -5,8 +5,11 @@ using ECommerce_Tawj.Reposatory.Interfaces;
 using ECommerce_Tawj.Services.CategoryServices.Interfaces;
 using ECommerce_Tawj.Services.ProductServices.Interfaces;
 using ECommerce_Tawj.ViewModels.ProductsVM;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 
 namespace ECommerce_Tawj.Controllers
 {
@@ -22,8 +25,15 @@ namespace ECommerce_Tawj.Controllers
             _categoryService = categoryService;
             _mapper = mapper;
         }
+        [HttpGet]
+        public async Task<IActionResult> AllProduct(string? searchTerm, int? categoryId, int pageNumber = 1)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var model = await _productService.GetShopProductsAsync(searchTerm, categoryId, userId, pageNumber);
+            return View(model);
+        }
 
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var products = await _productService.GetProductWithCategoriesWithProImagesAsync();
@@ -31,6 +41,7 @@ namespace ECommerce_Tawj.Controllers
             return View(productsDto);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
             ViewBag.Categories = await GetCategories();
@@ -45,20 +56,59 @@ namespace ECommerce_Tawj.Controllers
                 return View(model);
             }
             await _productService.AddProductAsync(model);
+            TempData["Success"] = $"{model.Name} Added Successfully";
             return RedirectToAction("Index");
         }
-        public IActionResult AllProduct()
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(int id)
         {
-            return View(); 
+            var model = await _productService.GetProductForEditAsync(id);
+            if (model == null) return NotFound();
+
+            return View(model);
         }
-        public async Task<IActionResult> ProductDetails(int productId)
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(ProductEditDTO model)
         {
-            if (productId <= 0)
+            if (!ModelState.IsValid)
+            {
+                var categories = await _categoryService.GetAllCategoriesAsync();
+                model.Categories = categories;
+                return View(model);
+            }
+
+            await _productService.UpdateProductAsync(model);
+            TempData["Success"] = "Product updated successfully!";
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _productService.DeleteProductAsync(id);
+            if (result)
+            {
+                TempData["Success"] = "Product deleted successfully!";
+            }
+            else
+            {
+                TempData["Error"] = "Failed to delete product.";
+            }
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> ProductDetails(int Id)
+        {
+            if (Id <= 0)
             {
                 return NotFound();
             }
 
-            var productDto = await _productService.GetProductDetailsByIdAsync(productId);
+            var productDto = await _productService.GetProductDetailsByIdAsync(Id);
             if (productDto == null)
             {
                 return NotFound();

@@ -1,8 +1,10 @@
 ﻿using ECommerce_Tawj.Services.AdminServices.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce_Tawj.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class AdminController : Controller
     {
         private readonly IAdminService _adminService;

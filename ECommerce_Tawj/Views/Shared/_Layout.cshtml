@@ -48,7 +48,7 @@
                             <a class="nav-link active fw-medium" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-medium" href="#Shop">Shop</a>
+                            <a class="nav-link fw-medium" asp-controller="Product" asp-action="AllProduct">Shop</a>
                         </li>
                         <li class="nav-item">
                             <a asp-controller="Favorite" asp-action="Index" class="nav-link fw-medium" title="My Favorites">
@@ -74,9 +74,10 @@
                                 <button class="btn btn-outline-secondary dropdown-toggle rounded-3" type="button" data-bs-toggle="dropdown">
                                     <i class="fa-regular fa-user me-1"></i> @User.Identity?.Name
                                 </button>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-menu-item dropdown-item" href="#">My Profile</a></li>
-                                    <li><a class="dropdown-menu-item dropdown-item" href="#">Orders</a></li>
+                                @if(User.IsInRole("Admin")){
+                                       <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-menu-item dropdown-item" asp-controller="Admin">Dashboard</a></li>
+                                    <li><a class="dropdown-menu-item dropdown-item" asp-controller="Order">Orders</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
                                         <a class="dropdown-item text-danger fw-bold" asp-controller="Account" asp-action="Logout">
@@ -84,6 +85,25 @@
                                         </a>
                                     </li>
                                 </ul>
+                                }else{
+                                      <ul class="dropdown-menu dropdown-menu-end">
+                                  <li>
+                                    <a class="dropdown-item" asp-controller="Order" asp-action="UserOrders">
+                                        <i class="fa-solid fa-bag-shopping me-2 text-orange" style="color: #ff5722;"></i> My Orders
+                                    </a>
+                                 </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Favorite" asp-action="Index">
+                                            <i class="fa-solid fa-heart me-2 text-danger"></i> My Favorites
+                                        </a>
+                                    </li>
+                                      <li>
+                                        <a class="dropdown-item text-danger fw-bold" asp-controller="Account" asp-action="Logout">
+                                            <i class="fa-solid fa-arrow-right-from-bracket me-1"></i> Logout
+                                        </a>
+                                    </li>
+                                     </ul>
+                                }
                             </div>
                         }
                         else

@@ -1,4 +1,5 @@
-﻿using ECommerce_Tawj.DTOs.OrdersDTOs;
+﻿using AspNetCoreGeneratedDocument;
+using ECommerce_Tawj.DTOs.OrdersDTOs;
 using ECommerce_Tawj.Models;
 using ECommerce_Tawj.Services.CartServices.Interfaces;
 using ECommerce_Tawj.Services.OrderServices.Interfaces;
@@ -23,6 +24,7 @@ namespace ECommerce_Tawj.Controllers
 
             StripeConfiguration.ApiKey = _configuration["Stripe:SecretKey"];
         }
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var orders = await _orderService.GetAllOrdersAsync();
@@ -101,6 +103,17 @@ namespace ECommerce_Tawj.Controllers
             }
 
             return View(order);
+        }
+        [HttpGet]
+        public async Task<IActionResult> UserOrders()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            var orders = await _orderService.GetUserOrdersAsync(userId!);
+            return View(orders);
         }
 
     }

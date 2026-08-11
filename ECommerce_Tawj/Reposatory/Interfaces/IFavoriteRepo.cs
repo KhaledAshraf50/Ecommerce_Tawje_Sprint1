@@ -5,5 +5,7 @@ namespace ECommerce_Tawj.Reposatory.Interfaces
     public interface IFavoriteRepo : IGenricRepo<Favorite>
     {
         Task<IEnumerable<Favorite>> GetFavoritesWithProductsAsync(string userId);
+
+        Task<IEnumerable<Favorite>> GetFavoritesByUserIdAsync(string userId);
     }
 }

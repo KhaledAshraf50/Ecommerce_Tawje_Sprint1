@@ -66,6 +66,7 @@ namespace ECommerce_Tawj.Profiles
 
             // 1. تحويل عناصر السلة إلى عناصر الطلب
             CreateMap<CartItemDTO, OrderItem>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.UnitPrice, opt => opt.MapFrom(src => src.ProductPrice));
 
             // 2. تحويل CheckoutDTO إلى Order (يشمل تحويل القائمة تلقائياً)
@@ -82,6 +83,15 @@ namespace ECommerce_Tawj.Profiles
             // Mapping for Recent Orders in Admin Dashboard
             CreateMap<Order, RecentOrderDTO>()
                 .ForMember(dest => dest.CustomerName, opt => opt.MapFrom(src => $"{src.ShippingFirstName} {src.ShippingLastName}"));
+            // Mapping for User Orders
+            CreateMap<Order,UserOrderDTO>()
+                .ForMember(dest => dest.ItemsCount, opt => opt.MapFrom(src => src.OrderItems.Count))
+                .ForMember(dest => dest.ItemsSummary, opt => opt.MapFrom(src =>
+                string.Join(", ", src.OrderItems.Select(i => $"{i.Product.Name} (x{i.Quantity})"))))
+                .ForMember(dest => dest.ShippingAddress, opt => opt.MapFrom(src =>
+                $"{src.ShippingAddress}, {src.ShippingCity}"));
+
+            CreateMap<CategoryDTO, Category>();
         }
     }
 }

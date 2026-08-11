@@ -6,5 +6,7 @@ namespace ECommerce_Tawj.Reposatory.Interfaces
     {
         Task<IEnumerable<Product>> GetProductWithCategoriesWithProImages();
         Task<Product?> GetProductWithDetailsByIdAsync(int id);
+
+        IQueryable<Product> GetAllQueryable();
     }
 }

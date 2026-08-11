@@ -16,6 +16,8 @@ using ECommerce_Tawj.Services.OrderServices.Implement;
 using ECommerce_Tawj.Services.OrderServices.Interfaces;
 using ECommerce_Tawj.Services.ProductServices.Implement;
 using ECommerce_Tawj.Services.ProductServices.Interfaces;
+using ECommerce_Tawj.Services.UserServices.Implement;
+using ECommerce_Tawj.Services.UserServices.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Stripe;
@@ -52,6 +54,7 @@ builder.Services.AddScoped<IFavoriteService, FavoriteService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 var app = builder.Build();

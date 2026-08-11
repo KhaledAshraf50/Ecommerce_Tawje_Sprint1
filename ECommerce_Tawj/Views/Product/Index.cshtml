@@ -1,13 +1,13 @@
 ﻿@using ECommerce_Tawj.ViewModels.ProductsVM
 @model List<ProductDTO>
 @{
-
     ViewData["Title"] = "Product List";
     Layout = "_AdminLayout";
 }
 @section Styles{
     <link rel="stylesheet" href="~/css/productList.css" />
 }
+
 <main class="flex-grow-1 p-4 p-md-5" style="max-width: 1000px">
     <h4 class="fw-bold text-dark mb-4">All Product</h4>
 
@@ -18,7 +18,7 @@
                     <th scope="col" style="width: 40%">Product</th>
                     <th scope="col">Category</th>
                     <th scope="col">Price</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" class="text-end">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,16 +30,24 @@
                                 <div class="product-img-box">
                                     <img src="@pro.MainImage" alt="@pro.ProductName" />
                                 </div>
-                                <span class="fw-medium text-dark">@pro.ProductDescription</span>
+                                <span class="fw-medium desc text-dark">@pro.ProductDescription</span>
                             </div>
                         </td>
                         <td>@pro.CategoryName</td>
                         <td class="fw-medium text-dark">$@pro.ProductPrice</td>
-                        <td>
-                            <a asp-controller="product" asp-action="ProductDetails" asp-route-productId="@pro.Id" class="btn-visit">
-                                Visit
-                                <i class="fa-solid fa-arrow-up-right-from-square fs-6"></i>
+                        <td class="text-end">
+                            <a asp-controller="Product" asp-action="ProductDetails" asp-route-id="@pro.Id" class="btn btn-sm btn-outline-info me-1" title="Visit">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
                             </a>
+                            <a asp-controller="Product" asp-action="Edit" asp-route-id="@pro.Id" class="btn btn-sm btn-outline-secondary me-1" title="Edit">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+                            <form asp-controller="Product" asp-action="Delete" asp-route-id="@pro.Id" method="post" class="d-inline delete-form">
+                                @Html.AntiForgeryToken()
+                                <button type="button" class="btn btn-sm btn-outline-danger btn-delete" title="Delete">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 }
@@ -47,3 +55,27 @@
         </table>
     </div>
 </main>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.querySelectorAll('.btn-delete').forEach(button => {
+            button.addEventListener('click', function () {
+                const form = this.closest('.delete-form');
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+}

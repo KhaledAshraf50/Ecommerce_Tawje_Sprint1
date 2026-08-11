@@ -12,6 +12,14 @@ namespace ECommerce_Tawj.Reposatory.Implemention
         {
         }
 
+        public IQueryable<Product> GetAllQueryable()
+        {
+            return _context.Products
+                .Include(p => p.Category)
+                .Include(p=>p.Images)
+                .AsNoTracking(); // للأداء العالي مع القراءة فقط
+        }
+
         public async Task<IEnumerable<Product>> GetProductWithCategoriesWithProImages()
         {
             return await _context.Products

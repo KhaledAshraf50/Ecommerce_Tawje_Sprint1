@@ -11,5 +11,12 @@ namespace ECommerce_Tawj.Services.ProductServices.Interfaces
         Task<HomeDTO> GetHomePageDataAsync(string? userId);
 
         Task<ProductDetailsDTO?> GetProductDetailsByIdAsync(int productId);
+
+        Task<ShopDTO> GetShopProductsAsync
+            (string? searchTerm, int? categoryId, string? userId, int pageNumber = 1, int pageSize = 9);
+
+        Task<ProductEditDTO?> GetProductForEditAsync(int id);
+        Task UpdateProductAsync(ProductEditDTO model);
+        Task<bool> DeleteProductAsync(int id);
     }
 }

@@ -19,5 +19,13 @@ namespace ECommerce_Tawj.Reposatory.Implemention
                 .ThenInclude(p=>p.Images)
                 .ToListAsync();
         }
+        public async Task<IEnumerable<Favorite>> GetFavoritesByUserIdAsync(string userId)
+        {
+            return await _context.Favorites
+                .Include(f => f.Product)
+                .Where(f => f.UserId == userId)
+                .AsNoTracking()
+                .ToListAsync();
+        }
     }
 }

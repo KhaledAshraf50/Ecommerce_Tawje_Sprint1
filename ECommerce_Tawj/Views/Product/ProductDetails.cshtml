@@ -133,28 +133,50 @@
             </p>
 
             <hr class="my-4" />
-
-            <!-- Quantity & Actions -->
-            <div class="d-flex align-items-center gap-3">
-                <div class="input-group" style="width: 130px">
-                    <button class="btn btn-outline-secondary" type="button" onclick="decrementQty()">-</button>
-                    <input type="text" id="quantityInput" class="form-control text-center" value="1" readonly />
-                    <button class="btn btn-outline-secondary" type="button" onclick="incrementQty()">+</button>
-                </div>
-
-                <button class="btn btn-orange px-4 py-2 rounded-3">
-                    <i class="fa-solid fa-cart-plus me-2"></i>Add to Cart
-                </button>
-
-                <button class="btn btn-outline-secondary p-2 px-3 rounded-3 btn-favorite" data-product-id="@Model.Id">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
+                    <form asp-controller="Cart" asp-action="AddToCart" method="post" class="d-inline">
+                        <input type="hidden" name="productId" value="@Model.Id" />
+                        <button type="submit" class="btn btn-orange text-white btn-sm rounded-pill px-3">
+                            <i class="fa-solid fa-cart-plus me-1"></i> Add
+                        </button>
+                    </form>
             </div>
         </div>
     </div>
 </section>
 
 @section Scripts {
+       <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+            $(document).ready(function(){
+            $(document).on('click','.btn-favorite',function(e){
+                e.preventDefault();
+                var buuton = $(this);
+                var icon = buuton.find('i');
+                var productId = buuton.data('product-id');
+
+                $.ajax({
+                    url:'/Favorite/ToggleFavorite',
+                    type:'POST',
+                    data:{productId:productId},
+                    success:function(response){
+                        if(response.success){
+                            if(response.isFavorite){
+                                icon.removeClass('fa-regular text-secondary').addClass('fa-solid text-danger');
+                            }
+                            else{
+                                 icon.removeClass('fa-solid text-danger').addClass('fa-regular text-secondary');
+                            }
+                        }
+                    },
+                    error:function(xhr){
+                        if(xhr.status == 401){
+                            window.location.href = '/Account/Login'
+                        }
+                    }
+                });
+            });
+        });
+    </script>
     <script>
         function changeImage(element) {
             document.getElementById('mainImage').src = element.src;
@@ -162,16 +184,6 @@
             element.classList.add('active');
         }
 
-        function incrementQty() {
-            let input = document.getElementById('quantityInput');
-            input.value = parseInt(input.value) + 1;
-        }
-
-        function decrementQty() {
-            let input = document.getElementById('quantityInput');
-            if (parseInt(input.value) > 1) {
-                input.value = parseInt(input.value) - 1;
-            }
-        }
+     
     </script>
 }

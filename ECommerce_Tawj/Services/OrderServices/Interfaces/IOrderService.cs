@@ -11,5 +11,7 @@ namespace ECommerce_Tawj.Services.OrderServices.Interfaces
 
         Task ConfirmStripePaymentAsync(int orderId);
         Task<Order?> GetOrderByIdAsync(int orderId, string userId);
+
+        Task<IEnumerable<UserOrderDTO>> GetUserOrdersAsync(string userId);
     }
 }

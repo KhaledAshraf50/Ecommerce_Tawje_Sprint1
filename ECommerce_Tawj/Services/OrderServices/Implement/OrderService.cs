@@ -51,7 +51,7 @@ namespace ECommerce_Tawj.Services.OrderServices.Implement
             }
             await _unitOfWork.SaveChangesAsync();
 
-            // إعادة الأوردر شاملاً تفاصيل المنتجات (Product Navigation Properties)
+            // إعادة الأوردر شاملاً تفاصيل المنتجات
             var createdOrder = await _unitOfWork.OrderRepo.GetOrderWithItemsByIdAsync(order.Id, userId);
             return createdOrder ?? order;
         }
@@ -125,6 +125,12 @@ namespace ECommerce_Tawj.Services.OrderServices.Implement
         public async Task<Order?> GetOrderByIdAsync(int orderId, string userId)
         {
             return await _unitOfWork.OrderRepo.GetOrderWithItemsByIdAsync(orderId, userId);
+        }
+
+        public async Task<IEnumerable<UserOrderDTO>> GetUserOrdersAsync(string userId)
+        {
+            var userOrders = await _unitOfWork.OrderRepo.GetOrdersByUserIdAsync(userId);
+            return _mapper.Map<IEnumerable<UserOrderDTO>>(userOrders);
         }
     }
 }

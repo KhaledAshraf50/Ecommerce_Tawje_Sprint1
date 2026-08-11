@@ -6,5 +6,6 @@ namespace ECommerce_Tawj.Reposatory.Interfaces
     {
        Task<Order?> GetOrderWithItemsByIdAsync(int orderId, string userId);
         Task<IEnumerable<Order>> GetAllOrdersWithDetailsAsync();
+        Task<IEnumerable<Order>> GetOrdersByUserIdAsync(string userId);
     }
 }
