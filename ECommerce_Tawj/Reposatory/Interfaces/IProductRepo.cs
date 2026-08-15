@@ -8,5 +8,6 @@ namespace ECommerce_Tawj.Reposatory.Interfaces
         Task<Product?> GetProductWithDetailsByIdAsync(int id);
 
         IQueryable<Product> GetAllQueryable();
+        Task<Product?> GetProductWithDetailsForUpdateAsync(int id);
     }
 }

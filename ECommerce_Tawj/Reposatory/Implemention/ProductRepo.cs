@@ -36,5 +36,11 @@ namespace ECommerce_Tawj.Reposatory.Implemention
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
+        public async Task<Product?> GetProductWithDetailsForUpdateAsync(int id)
+        {
+            return await _context.Products
+                .Include(p => p.Images)
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
     }
 }

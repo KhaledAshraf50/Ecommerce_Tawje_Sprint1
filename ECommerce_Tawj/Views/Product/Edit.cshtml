@@ -5,6 +5,31 @@
     ViewData["Title"] = "Edit Product";
     Layout = "_AdminLayout";
 }
+@section Styles{
+    <style>
+        .upload-box {
+            width: 100px; /* عرض المربع */
+            height: 100px; /* طول المربع */
+            position: relative; /* عشان الصورة تثبت جواه */
+            overflow: hidden; /* مهم جداً: بيقص أي حاجة تخرج برة المربع */
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+            .upload-box img {
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: cover; /* بيخلي الصورة تملى المربع وتكون مضبوطة بدون مط */
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+    </style>
+}
 
 <main class="flex-grow-1 p-4 p-md-5" style="max-width: 800px;">
     <h4 class="fw-bold text-dark mb-4">Edit Product</h4>
@@ -13,8 +38,6 @@
         <form asp-controller="Product" asp-action="Edit" method="post" enctype="multipart/form-data">
             @Html.AntiForgeryToken()
             <input type="hidden" asp-for="Id" />
-            <input type="hidden" asp-for="ExistingImageUrl" />
-
             <div class="row g-3">
                 <div class="col-md-6">
                     <label class="form-label text-secondary small fw-bold">Product Name</label>
@@ -36,9 +59,29 @@
                     <span asp-validation-for="Price" class="text-danger small"></span>
                 </div>
 
-                <div class="col-md-6">
+                @* <div class="col-md-6">
                     <label class="form-label text-secondary small fw-bold">Change Image</label>
-                    <input asp-for="NewImage" class="form-control" type="file" accept="image/*" />
+                    <input asp-for="NewImages" class="form-control" type="file" accept="image/*" />
+                </div> *@
+                <div class="mb-4">
+                    <label class="form-label fw-bold text-secondary mb-3">Product Image</label>
+                    <div class="d-flex gap-3">
+                        @for (int i = 0; i < 4; i++)
+                        {
+                            <label class="upload-box d-flex flex-column align-items-center justify-content-center" style="cursor:pointer;">
+
+                                <img src="#" alt="Preview" class="d-none" />
+
+                                <div class="dz-message d-flex flex-column align-items-center justify-content-center">
+                                    <i class="fa-solid fa-cloud-arrow-up fs-4 mb-1"></i>
+                                    <span class="small">Upload</span>
+                                </div>
+
+                                <input type="file" name="NewImages" hidden accept="image/*" class="image-input" />
+                            </label>
+                            <span asp-validation-for="NewImages" class="text-danger"></span>
+                        }
+                    </div>
                 </div>
 
                 <div class="col-12">
@@ -46,15 +89,6 @@
                     <textarea asp-for="Description" class="form-control" rows="4"></textarea>
                     <span asp-validation-for="Description" class="text-danger small"></span>
                 </div>
-
-                @if (!string.IsNullOrEmpty(Model.ExistingImageUrl))
-                {
-                    <div class="col-12 my-2">
-                        <label class="form-label text-secondary small fw-bold d-block">Current Image</label>
-                        <img src="@Model.ExistingImageUrl" style="max-height: 120px; object-fit: contain;" class="rounded border p-2" />
-                    </div>
-                }
-
                 <div class="col-12 d-flex gap-2 mt-4">
                     <button type="submit" class="btn btn-orange px-4 rounded-3">Save Changes</button>
                     <a asp-action="Index" class="btn btn-light px-4 rounded-3">Cancel</a>
@@ -63,7 +97,31 @@
         </form>
     </div>
 </main>
-
-@section Scripts {
+@section Scripts{
+    <script>
+        document.querySelectorAll('.image-input').forEach(input=>{
+            input.addEventListener('change',function(e){
+                const file = this.files[0];
+                const uploadBox = this.closest('.upload-box');
+                const previewImg = uploadBox.querySelector('img');
+                const dzMessage = uploadBox.querySelector('.dz-message');
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        previewImg.src = event.target.result;
+                        previewImg.classList.remove('d-none'); // إظهار الصورة
+                        dzMessage.classList.add('d-none'); // إخفاء الأيقونة والكلام
+                    }
+                    reader.readAsDataURL(file);
+                }
+                else{
+                    // لو ألغى الاختيار، نرجع الشكل القديم
+                    previewImg.src = "#";
+                    previewImg.classList.add('d-none');
+                    dzMessage.classList.remove('d-none');
+                }
+            });
+        });
+    </script>
     <partial name="_ValidationScriptsPartial" />
 }

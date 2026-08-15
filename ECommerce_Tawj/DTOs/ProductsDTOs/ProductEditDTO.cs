@@ -21,7 +21,7 @@ namespace ECommerce_Tawj.DTOs.ProductsDTOs
         public int CategoryId { get; set; }
 
         public string? ExistingImageUrl { get; set; }
-        public IFormFile? NewImage { get; set; }
+        public List<IFormFile>? NewImages { get; set; }
 
         public IEnumerable<CategoryDTO>? Categories { get; set; }
     }

@@ -12,6 +12,7 @@ using ECommerce_Tawj.Services.CategoryServices.Implement;
 using ECommerce_Tawj.Services.CategoryServices.Interfaces;
 using ECommerce_Tawj.Services.FavoriteService.Implement;
 using ECommerce_Tawj.Services.FavoriteService.Interface;
+using ECommerce_Tawj.Services.FilesService;
 using ECommerce_Tawj.Services.OrderServices.Implement;
 using ECommerce_Tawj.Services.OrderServices.Interfaces;
 using ECommerce_Tawj.Services.ProductServices.Implement;
@@ -55,6 +56,7 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IFileService, LocalFileService>();
 
 
 var app = builder.Build();

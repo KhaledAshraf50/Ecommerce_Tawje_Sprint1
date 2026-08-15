@@ -55,9 +55,19 @@ namespace ECommerce_Tawj.Controllers
                ViewBag.Categories = await GetCategories();
                 return View(model);
             }
-            await _productService.AddProductAsync(model);
-            TempData["Success"] = $"{model.Name} Added Successfully";
-            return RedirectToAction("Index");
+            try
+            {
+                await _productService.AddProductAsync(model);
+                TempData["Success"] = $"{model.Name} Added Successfully";
+                return RedirectToAction("Index");
+
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.Message);
+                ViewBag.Categories = await GetCategories();
+                return View(model);
+            }
         }
 
         [HttpGet]

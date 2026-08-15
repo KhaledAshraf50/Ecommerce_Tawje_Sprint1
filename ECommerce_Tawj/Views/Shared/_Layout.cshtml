@@ -76,8 +76,8 @@
                                 </button>
                                 @if(User.IsInRole("Admin")){
                                        <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-menu-item dropdown-item" asp-controller="Admin">Dashboard</a></li>
-                                    <li><a class="dropdown-menu-item dropdown-item" asp-controller="Order">Orders</a></li>
+                                    <li><a class="dropdown-menu-item dropdown-item" asp-controller="Admin" asp-action="Index">Dashboard</a></li>
+                                        <li><a class="dropdown-menu-item dropdown-item" asp-controller="Order" asp-action="Index">Orders</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
                                         <a class="dropdown-item text-danger fw-bold" asp-controller="Account" asp-action="Logout">

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/css/addProduct.css" />
 }
 <main class="flex-grow-1 p-4 p-md-5" style="max-width: 900px">
+    <div asp-validation-summary="All" class="text-danger"></div>
     <form asp-action="Create" method="post" asp-controller="Product" enctype="multipart/form-data" id="addProductForm">
         <!-- Product Image Upload -->
         <div class="mb-4">

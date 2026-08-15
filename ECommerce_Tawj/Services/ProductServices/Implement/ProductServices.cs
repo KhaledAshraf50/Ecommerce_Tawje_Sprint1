@@ -5,6 +5,7 @@ using ECommerce_Tawj.DTOs.ProductsDTOs;
 using ECommerce_Tawj.Models;
 using ECommerce_Tawj.Reposatory.Interfaces;
 using ECommerce_Tawj.Services.FavoriteService.Interface;
+using ECommerce_Tawj.Services.FilesService;
 using ECommerce_Tawj.Services.ProductServices.Interfaces;
 using ECommerce_Tawj.ViewModels.ProductsVM;
 using Microsoft.EntityFrameworkCore;
@@ -15,13 +16,16 @@ namespace ECommerce_Tawj.Services.ProductServices.Implement
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly IWebHostEnvironment _webHostEnvironment; // عشان نوصل لمسار الصور (wwwroot)
+        private readonly IFileService _fileService;
         private readonly IFavoriteService _favoriteService; 
-        public ProductServices(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment webHostEnvironment, IFavoriteService favoriteService)
+        public ProductServices(IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IFileService fileService,
+            IFavoriteService favoriteService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _webHostEnvironment = webHostEnvironment;
+            _fileService = fileService;
             _favoriteService = favoriteService;
         }
         public Task<IEnumerable<Product>> GetProductWithCategoriesWithProImagesAsync()
@@ -31,40 +35,12 @@ namespace ECommerce_Tawj.Services.ProductServices.Implement
         public async Task AddProductAsync(CreateProductDTO productDto)
         {
             var product = _mapper.Map<Product>(productDto);
-            if(productDto.Images != null && productDto.Images.Count > 0)
+            var uploadedImages = await _fileService.UploadFile(productDto.Images);
+            product.Images = uploadedImages.Select(path=> new ProductImage
             {
-                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "products");
-                Directory.CreateDirectory(uploadsFolder); // if folder not exist create it
-                bool isFirstImage = true;
-
-                foreach(var file in productDto.Images)
-                {
-                    if (file.Length>0)
-                    {
-                        // create uniqe name for each file 
-                        string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
-                        // create the full path for the file
-                        string filePath = Path.Combine(uploadsFolder,uniqueFileName);
-                        // open connect with the file and save it in the path
-                        using(var fileStream = new FileStream(filePath, FileMode.Create))
-                        {
-                            await file.CopyToAsync(fileStream);
-                        }
-                        //product.Images.Add(new ProductImage
-                        //{
-                        //    ImageUrl = "/images/products/" + uniqueFileName,
-                        //    IsMain = isFirstImage
-                        //});
-                        _unitOfWork.ProductImageRepo.Add(new ProductImage
-                        {
-                            ImageUrl = "/images/products/" + uniqueFileName,
-                            IsMain = isFirstImage,
-                            Product = product
-                        });
-                        isFirstImage = false; // بعد ما نحفظ الصورة الاولى نخلي الباقي false
-                    }
-                }
-            }
+                ImageUrl = path,
+                IsMain = true
+            }).ToList(); ;
             _unitOfWork.ProductRepo.Add(product);
             await _unitOfWork.SaveChangesAsync();
         }
@@ -143,7 +119,7 @@ namespace ECommerce_Tawj.Services.ProductServices.Implement
                 Id = p.Id,
                 Name = p.Name,
                 Price = p.Price,
-                ImageUrl = p.Images.FirstOrDefault()?.ImageUrl ?? "/images/default-product.png",
+                ImageUrl = p.Images.FirstOrDefault()?.ImageUrl ?? "/uploads/products/default.png",
                 CategoryName = p.Category != null ? p.Category.Name : "General",
                 IsFavorite = favoriteProductIds.Contains(p.Id)
             }).ToList();
@@ -181,36 +157,57 @@ namespace ECommerce_Tawj.Services.ProductServices.Implement
         }
         public async Task UpdateProductAsync(ProductEditDTO model)
         {
-            var product = await _unitOfWork.ProductRepo.GetByIdAsync(model.Id);
-            if (product == null) return;
+            var product = await _unitOfWork.ProductRepo
+                .GetProductWithDetailsForUpdateAsync(model.Id);
+
+            if (product == null)
+                return;
 
             product.Name = model.Name;
             product.Description = model.Description;
             product.Price = model.Price;
             product.CategoryId = model.CategoryId;
 
-            // حفظ الصورة الجديدة إذا تم رفعها
-            if (model.NewImage != null && model.NewImage.Length > 0)
+            if (model.NewImages != null && model.NewImages.Any())
             {
-                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.NewImage.FileName);
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/products", fileName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                // Delete old images
+                foreach (var oldImg in product.Images.ToList())
                 {
-                    await model.NewImage.CopyToAsync(stream);
+                    _fileService.DeleteFile(oldImg.ImageUrl);
+
+                    await _unitOfWork.ProductImageRepo
+                        .DeleteAsync(oldImg.Id);
                 }
 
-                product.Images.Add(new ProductImage { ImageUrl = "/images/products/" + fileName });
+                // Upload new images
+                var uploadedImages =
+                    await _fileService.UploadFile(model.NewImages);
+
+                // Add new images
+                foreach (var path in uploadedImages)
+                {
+                    product.Images.Add(new ProductImage
+                    {
+                        ImageUrl = path,
+                        IsMain = true
+                    });
+                }
             }
 
-            _unitOfWork.ProductRepo.Update(product);
             await _unitOfWork.SaveChangesAsync();
         }
         public async Task<bool> DeleteProductAsync(int id)
         {
-            var product = await _unitOfWork.ProductRepo.GetByIdAsync(id);
+            var product = await _unitOfWork.ProductRepo.GetProductWithDetailsByIdAsync(id);
             if (product == null) return false;
 
+            if (product.Images != null && product.Images.Any())
+            {
+                foreach (var img in product.Images)
+                {
+                    _fileService.DeleteFile(img.ImageUrl);
+                }
+            }
             await _unitOfWork.ProductRepo.DeleteAsync(id);
             await _unitOfWork.SaveChangesAsync();
             return true;
