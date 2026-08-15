@@ -10,5 +10,12 @@ namespace ECommerce_Tawj.Services.CartServices.Interfaces
         Task RemoveFromCartAsync(string userId, int cartItemId);
 
         Task<int> GetCartCountAsync(string userId);
+
+        // Increase Quantity to Increase Quantity
+        
+        // Decrease Quantity to Decrease Quantity
+
+        // Clear Cart to empty the cart entirely
+
     }
 }

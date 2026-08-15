@@ -92,6 +92,21 @@ namespace ECommerce_Tawj.Profiles
                 $"{src.ShippingAddress}, {src.ShippingCity}"));
 
             CreateMap<CategoryDTO, Category>();
+
+            // Map From product To SessionCartItem
+            CreateMap<Product, SessionCartItem>()
+             .ForMember(dest => dest.ProductId,
+                 opt => opt.MapFrom(src => src.Id))
+             .ForMember(dest => dest.ProductName,
+                 opt => opt.MapFrom(src => src.Name))
+             .ForMember(dest => dest.Price,
+                 opt => opt.MapFrom(src => src.Price))
+             .ForMember(dest => dest.ImageUrl,
+                 opt => opt.MapFrom(src =>
+                     src.Images.FirstOrDefault() != null
+                         ? src.Images.FirstOrDefault()!.ImageUrl
+                         : "/uploads/products/default.png"));
+
         }
     }
 }

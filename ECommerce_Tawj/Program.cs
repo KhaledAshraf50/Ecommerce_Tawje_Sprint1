@@ -57,6 +57,18 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IFileService, LocalFileService>();
+builder.Services.AddScoped<ICartServiceSession, CartServiceSession>();
+
+// Add Session Settings For Task2 Sprint2
+
+builder.Services.AddDistributedMemoryCache(); // reserve A Space In Memory
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
+builder.Services.AddHttpContextAccessor();
+
+
 
 
 var app = builder.Build();
@@ -70,11 +82,13 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.MapStaticAssets();
+
 app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapStaticAssets();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
