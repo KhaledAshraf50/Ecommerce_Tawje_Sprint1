@@ -26,10 +26,22 @@ namespace ECommerce_Tawj.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public async Task<IActionResult> AllProduct(string? searchTerm, int? categoryId, int pageNumber = 1)
+        public async Task<IActionResult> AllProduct(
+            string? searchTerm,
+            int? categoryId,
+            string? sortOrder,
+            int pageNumber = 1)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var model = await _productService.GetShopProductsAsync(searchTerm, categoryId, userId, pageNumber);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var model = await _productService.GetShopProductsAsync(
+                searchTerm,
+                categoryId,
+                userId,
+                sortOrder,
+                pageNumber,
+                9);
+
             return View(model);
         }
 

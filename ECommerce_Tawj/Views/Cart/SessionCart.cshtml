@@ -1,5 +1,4 @@
-﻿@using ECommerce_Tawj.DTOs.CartItemDTOs
-@model CartDTO
+﻿@model List<SessionCartItem>
 
 @{
     ViewData["Title"] = "Shopping Cart";
@@ -9,29 +8,37 @@
 <section class="container my-5">
 
     <div class="d-flex align-items-center justify-content-between mb-4 border-bottom pb-3">
+
         <div>
+
             <h2 class="fw-bold text-dark m-0">
                 <i class="fa-solid fa-cart-shopping me-2"
-                   style="color: #ff5722;"></i>
+                   style="color:#ff5722;"></i>
+
                 My Shopping Cart
             </h2>
 
             <p class="text-muted small mb-0 mt-1">
                 Review your items before proceeding to checkout
             </p>
+
         </div>
+
 
         <a asp-controller="Home"
            asp-action="Index"
            class="btn btn-outline-secondary rounded-3 btn-sm">
 
             <i class="fa-solid fa-arrow-left me-1"></i>
+
             Continue Shopping
+
         </a>
+
     </div>
 
 
-    @if (Model.Items != null && Model.Items.Any())
+    @if (Model != null && Model.Any())
     {
         <div class="row g-4">
 
@@ -45,6 +52,7 @@
                         <table class="table align-middle border-0 mb-0">
 
                             <thead class="table-light">
+
                                 <tr>
                                     <th>Product</th>
                                     <th>Price</th>
@@ -52,19 +60,22 @@
                                     <th>Total</th>
                                     <th class="text-end">Action</th>
                                 </tr>
+
                             </thead>
+
 
                             <tbody>
 
-                                @foreach (var item in Model.Items)
+                                @foreach (var item in Model)
                                 {
                                     <tr>
 
                                         <!-- Product -->
                                         <td>
+
                                             <div class="d-flex align-items-center gap-3">
 
-                                                <img src="@item.MainImage"
+                                                <img src="@item.ImageUrl"
                                                      class="rounded-3"
                                                      style="width:65px;
                                                 height:65px;
@@ -74,18 +85,23 @@
                                                      alt="@item.ProductName" />
 
                                                 <div>
+
                                                     <h6 class="fw-bold text-dark mb-0">
                                                         @item.ProductName
                                                     </h6>
+
                                                 </div>
 
                                             </div>
+
                                         </td>
 
 
                                         <!-- Price -->
                                         <td class="fw-semibold text-dark">
-                                            $@item.ProductPrice.ToString("F2")
+
+                                            $@item.Price.ToString("F2")
+
                                         </td>
 
 
@@ -96,48 +112,47 @@
 
                                                 <!-- Decrease -->
                                                 <form asp-controller="Cart"
-                                                      asp-action="UpdateQuantity"
+                                                      asp-action="DecreaseQuantity"
                                                       method="post">
 
                                                     <input type="hidden"
-                                                           name="cartItemId"
-                                                           value="@item.Id" />
-
-                                                    <input type="hidden"
-                                                           name="quantity"
-                                                           value="@(item.Quantity - 1)" />
+                                                           name="productId"
+                                                           value="@item.ProductId" />
 
                                                     <button type="submit"
                                                             class="btn btn-sm btn-outline-secondary">
+
                                                         <i class="fa-solid fa-minus"></i>
+
                                                     </button>
 
                                                 </form>
 
 
+                                                <!-- Quantity -->
                                                 <span class="fw-bold"
                                                       style="min-width:30px;
                                                     text-align:center;">
+
                                                     @item.Quantity
+
                                                 </span>
 
 
                                                 <!-- Increase -->
                                                 <form asp-controller="Cart"
-                                                      asp-action="UpdateQuantity"
+                                                      asp-action="IncreaseQuantity"
                                                       method="post">
 
                                                     <input type="hidden"
-                                                           name="cartItemId"
-                                                           value="@item.Id" />
-
-                                                    <input type="hidden"
-                                                           name="quantity"
-                                                           value="@(item.Quantity + 1)" />
+                                                           name="productId"
+                                                           value="@item.ProductId" />
 
                                                     <button type="submit"
                                                             class="btn btn-sm btn-outline-secondary">
+
                                                         <i class="fa-solid fa-plus"></i>
+
                                                     </button>
 
                                                 </form>
@@ -149,7 +164,9 @@
 
                                         <!-- Total -->
                                         <td class="fw-bold text-dark">
-                                            $@item.TotalPrice.ToString("F2")
+
+                                            $@((item.Price * item.Quantity).ToString("F2"))
+
                                         </td>
 
 
@@ -161,8 +178,8 @@
                                                   method="post">
 
                                                 <input type="hidden"
-                                                       name="cartItemId"
-                                                       value="@item.Id" />
+                                                       name="productId"
+                                                       value="@item.ProductId" />
 
                                                 <button type="submit"
                                                         class="btn btn-sm btn-outline-danger rounded-circle p-2"
@@ -200,27 +217,31 @@
                     </h5>
 
 
+                    <!-- Items Count -->
                     <div class="d-flex justify-content-between mb-2">
+
+                        <span class="text-muted">
+                            Items
+                        </span>
+
+                        <span class="fw-bold">
+                            @Model.Sum(x => x.Quantity)
+                        </span>
+
+                    </div>
+
+
+                    <!-- Subtotal -->
+                    <div class="d-flex justify-content-between mb-3">
 
                         <span class="text-muted">
                             Subtotal
                         </span>
 
                         <span class="fw-bold text-dark">
-                            $@Model.SubTotal.ToString("F2")
-                        </span>
 
-                    </div>
+                            $@Model.Sum(x => x.Price * x.Quantity).ToString("F2")
 
-
-                    <div class="d-flex justify-content-between mb-3">
-
-                        <span class="text-muted">
-                            Estimated Shipping
-                        </span>
-
-                        <span class="fw-bold text-dark">
-                            $@Model.ShippingFee.ToString("F2")
                         </span>
 
                     </div>
@@ -229,6 +250,7 @@
                     <hr />
 
 
+                    <!-- Total -->
                     <div class="d-flex justify-content-between mb-4">
 
                         <span class="fw-bold fs-5">
@@ -238,13 +260,32 @@
                         <span class="fw-bold fs-4"
                               style="color:#ff5722;">
 
-                            $@Model.GrandTotal.ToString("F2")
+                            $@Model.Sum(x => x.Price * x.Quantity).ToString("F2")
 
                         </span>
 
                     </div>
 
 
+                    <!-- Clear Cart -->
+                    <form asp-controller="Cart"
+                          asp-action="Clear"
+                          method="post"
+                          class="mb-2">
+
+                        <button type="submit"
+                                class="btn btn-outline-danger w-100">
+
+                            <i class="fa-solid fa-trash me-2"></i>
+
+                            Clear Cart
+
+                        </button>
+
+                    </form>
+
+
+                    <!-- Checkout -->
                     <a asp-action="CheckOut"
                        asp-controller="Order"
                        class="btn w-100 py-2 rounded-3 text-white fw-bold shadow-sm"
@@ -269,16 +310,21 @@
         <div class="text-center py-5 my-5">
 
             <div class="mb-3">
+
                 <i class="fa-solid fa-basket-shopping display-1 text-muted opacity-50"></i>
+
             </div>
+
 
             <h4 class="fw-bold text-dark">
                 Your Cart is Currently Empty
             </h4>
 
+
             <p class="text-muted small mb-4">
                 Looks like you haven't added anything to your cart yet.
             </p>
+
 
             <a asp-controller="Home"
                asp-action="Index"

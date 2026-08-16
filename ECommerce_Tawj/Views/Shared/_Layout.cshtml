@@ -3,16 +3,21 @@
 @inject SignInManager<ApplicationUser> _signInManager
 @inject UserManager<ApplicationUser> _userManager
 @inject ICartService _cartService
+@inject ICartServiceSession _cartServiceSession
+
 
 @{
-    int cartCount = 0;
-    if (_signInManager.IsSignedIn(User))
+    var userId = _userManager.GetUserId(User);
+
+    int cartCount;
+
+    if (_signInManager.IsSignedIn(User) && !string.IsNullOrEmpty(userId))
     {
-        var userId = _userManager.GetUserId(User);
-        if (!string.IsNullOrEmpty(userId))
-        {
-            cartCount = await _cartService.GetCartCountAsync(userId);
-        }
+        cartCount = await _cartService.GetCartCountAsync(userId);
+    }
+    else
+    {
+        cartCount = _cartServiceSession.GetCartCount();
     }
 }
 <!DOCTYPE html>
@@ -59,15 +64,16 @@
                     </ul>
                     <!-- User Profile / Account -->
                     <div class="d-flex align-items-center gap-3">
+                        <a asp-controller="Cart" asp-action="Index" class="btn btn-light rounded-circle position-relative p-2">
+                            <i class="fa-solid fa-cart-shopping fs-5 text-dark"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                @cartCount
+                            </span>
+                        </a>
                         @if (_signInManager.IsSignedIn(User))
                         {
                             <!-- Cart Button (Visible for logged in user) -->
-                            <a asp-controller="Cart" asp-action="Index" class="btn btn-light rounded-circle position-relative p-2">
-                                <i class="fa-solid fa-cart-shopping fs-5 text-dark"></i>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    @cartCount
-                                </span>
-                            </a>
+                         
 
                             <!-- User Profile / Account -->
                             <div class="dropdown">

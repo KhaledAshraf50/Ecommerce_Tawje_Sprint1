@@ -13,18 +13,60 @@
             <h3 class="fw-bold text-dark mb-0">Shop Our Products</h3>
         </div>
         <div class="col-md-6">
-            <form asp-controller="Product" asp-action="AllProduct" method="get">
-                <div class="input-group shadow-sm rounded-3">
-                    <input type="text"
-                           name="searchTerm"
-                           value="@Model.SearchTerm"
-                           class="form-control border-end-0 py-2 ps-3"
-                           placeholder="Search products..." />
-                    <input type="hidden" name="categoryId" value="@Model.SelectedCategoryId" />
-                    <button class="btn btn-white border border-start-0 text-muted" type="submit">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
+            <form asp-controller="Product"
+                  asp-action="AllProduct"
+                  method="get">
+
+                <div class="row g-2">
+
+                    <div class="col-md-7">
+                        <input type="text"
+                               name="searchTerm"
+                               value="@Model.SearchTerm"
+                               class="form-control"
+                               placeholder="Search products..." />
+                    </div>
+
+                    <div class="col-md-4">
+                        <select name="sortOrder" class="form-select">
+
+                            <option value="">Sort By</option>
+
+                            <option value="name_asc"
+                                    selected="@(Model.SortOrder == "name_asc")">
+                                Name A-Z
+                            </option>
+
+                            <option value="name_desc"
+                                    selected="@(Model.SortOrder == "name_desc")">
+                                Name Z-A
+                            </option>
+
+                            <option value="price_asc"
+                                    selected="@(Model.SortOrder == "price_asc")">
+                                Price Low → High
+                            </option>
+
+                            <option value="price_desc"
+                                    selected="@(Model.SortOrder == "price_desc")">
+                                Price High → Low
+                            </option>
+
+                        </select>
+                    </div>
+
+                    <div class="col-md-1">
+                        <button class="btn btn-dark w-100" type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+
                 </div>
+
+                <input type="hidden"
+                       name="categoryId"
+                       value="@Model.SelectedCategoryId" />
+
             </form>
         </div>
     </div>
@@ -44,6 +86,7 @@
                asp-action="AllProduct"
                asp-route-categoryId="@cat.Id"
                asp-route-searchTerm="@Model.SearchTerm"
+               asp-route-sortOrder="@Model.SortOrder"
                class="btn rounded-pill px-4 btn-sm @(Model.SelectedCategoryId == cat.Id ? "btn-dark" : "btn-outline-secondary")">
                 @cat.Name
             </a>
@@ -103,9 +146,10 @@
                     <li class="page-item @(!Model.HasPreviousPage ? "disabled" : "")">
                         <a class="page-link"
                            asp-controller="Product"
-                           asp-action="Index"
+                           asp-action="AllProduct"
                            asp-route-searchTerm="@Model.SearchTerm"
                            asp-route-categoryId="@Model.SelectedCategoryId"
+                           asp-route-sortOrder="@Model.SortOrder"
                            asp-route-pageNumber="@(Model.PageNumber - 1)">Previous</a>
                     </li>
 
@@ -114,19 +158,22 @@
                         <li class="page-item @(i == Model.PageNumber ? "active" : "")">
                             <a class="page-link @(i == Model.PageNumber ? "bg-dark border-dark" : "text-dark")"
                                asp-controller="Product"
-                               asp-action="Index"
+                               asp-action="AllProduct"
                                asp-route-searchTerm="@Model.SearchTerm"
                                asp-route-categoryId="@Model.SelectedCategoryId"
-                               asp-route-pageNumber="@i">@i</a>
+                               asp-route-sortOrder="@Model.SortOrder"
+                               asp-route-pageNumber="@i">
+                               </a>
                         </li>
                     }
 
                     <li class="page-item @(!Model.HasNextPage ? "disabled" : "")">
                         <a class="page-link"
                            asp-controller="Product"
-                           asp-action="Index"
+                           asp-action="AllProduct"
                            asp-route-searchTerm="@Model.SearchTerm"
                            asp-route-categoryId="@Model.SelectedCategoryId"
+                           asp-route-sortOrder="@Model.SortOrder"
                            asp-route-pageNumber="@(Model.PageNumber + 1)">Next</a>
                     </li>
                 </ul>

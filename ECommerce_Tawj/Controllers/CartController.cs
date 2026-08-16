@@ -1,6 +1,7 @@
 ﻿using ECommerce_Tawj.Services.CartServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.CompilerServices;
+using System.Security.Claims;
 
 namespace ECommerce_Tawj.Controllers
 {
@@ -8,73 +9,86 @@ namespace ECommerce_Tawj.Controllers
     {
         private readonly ICartServiceSession _cartServiceSession;
 
-        //private readonly ICartService _cartService;
+        private readonly ICartService _cartService;
 
         public CartController
-            (/*ICartService cartService*/
+            (ICartService cartService,
              ICartServiceSession cartServiceSession)
         {
             _cartServiceSession = cartServiceSession;
-            //_cartService = cartService;
+            _cartService = cartService;
         }
-        //public string GetUserId()
-        //{
-        //    return User.Identity.IsAuthenticated ? 
-        //        User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value : null;
-        //}
-        //public  IActionResult? IsLogin(string userId)
+        private string? GetUserId()
+        {
+            return User.Identity?.IsAuthenticated == true
+                ? User.FindFirstValue(ClaimTypes.NameIdentifier)
+                : null;
+        }
+        //public IActionResult? IsLogin(string userId)
         //{
         //    if (userId == null)
         //    {
-        //        return  RedirectToAction("Login", "Account");
+        //        var cart = _cartServiceSession.GetCart();
+        //        return View("Index",cart);
         //    }
         //    return null;
         //}
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            //var userId = GetUserId();
-            //var loginCheck = IsLogin(userId);
-            //if(loginCheck != null) return loginCheck;
+            var userId = GetUserId();
 
-            //var cart = await _cartService.GetCartByUserIdAsync(userId);
-            var cart = _cartServiceSession.GetCart();
-  
-            return View(cart);
+            // Guest User -> Session Cart
+            if (userId == null)
+            {
+                var sessionCart = _cartServiceSession.GetCart();
+
+                return View("SessionCart", sessionCart);
+            }
+            // Logged In User -> Database Cart
+            var dbCart = await _cartService.GetCartByUserIdAsync(userId);
+
+            return View("Index", dbCart);
         }
         [HttpPost]
         public async Task<IActionResult> AddToCart(int productId, int quantity = 1)
         {
-            //var userId = GetUserId();
-            //var loginCheck = IsLogin(userId);
-            //if (loginCheck != null) return loginCheck;
-            //await _cartService.AddToCartAsync(userId!, productId, quantity);
-            await _cartServiceSession.AddItemAsync(productId, quantity);
+            var userId = GetUserId();
+            if (userId == null)
+            {
+                // Guest -> Session
+                await _cartServiceSession.AddItemAsync(productId,quantity);
+            }
+            else
+            {
+                await _cartService.AddToCartAsync(userId,productId,quantity);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateQuantity(int cartItemId, int quantity)
+        {
+            var userId = GetUserId();
+            await _cartService.UpdateQuantityAsync(userId!, cartItemId, quantity);
+
             return RedirectToAction("Index");
         }
-        //[HttpPost]
-        //public async Task<IActionResult> UpdateQuantity(int cartItemId, int quantity)
-        //{
-        //    //var userId = GetUserId();
-        //    //var loginCheck = IsLogin(userId);
-        //    //if (loginCheck != null) return loginCheck;
-        //    //await _cartService.UpdateQuantityAsync(userId!, cartItemId, quantity);
-
-        //    return RedirectToAction("Index");
-        //}
         [HttpPost]
         public async Task<IActionResult> IncreaseQuantity(int productId)
         {
-            await _cartServiceSession.IncreaseQuantityAsync(productId);
 
+                // Guest -> Session
+                await _cartServiceSession
+                    .IncreaseQuantityAsync(productId);
             return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
         public async Task<IActionResult> DecreaseQuantity(int productId)
         {
-            await _cartServiceSession.DecreaseQuantityAsync(productId);
-
+            await _cartServiceSession
+                     .DecreaseQuantityAsync(productId);
             return RedirectToAction(nameof(Index));
         }
 
@@ -83,17 +97,56 @@ namespace ECommerce_Tawj.Controllers
         [HttpPost]
         public async Task<IActionResult> Remove(int productId)
         {
-            //var userId = GetUserId();
-            //var loginCheck = IsLogin(userId);
-            //if (loginCheck != null) return loginCheck;
-            //await _cartService.RemoveFromCartAsync(userId!, cartItemId);
-            _cartServiceSession.RemoveItem(productId);
-            return RedirectToAction("Index");
+            var userId = GetUserId();
+
+            if (userId == null)
+            {
+                // Guest -> Session
+                _cartServiceSession.RemoveItem(productId);
+            }
+            else
+            {
+                // Logged In -> Database
+                var cart = await _cartService
+                    .GetCartByUserIdAsync(userId);
+
+                var item = cart.Items
+                    .FirstOrDefault(x => x.ProductId == productId);
+
+                if (item != null)
+                {
+                    await _cartService.RemoveFromCartAsync(
+                        userId,
+                        item.Id);
+                }
+            }
+
+            return RedirectToAction(nameof(Index));
         }
         [HttpPost]
-        public IActionResult Clear()
+        public async Task<IActionResult> Clear()
         {
-            _cartServiceSession.ClearCart();
+            var userId = GetUserId();
+
+            if (userId == null)
+            {
+                // Guest -> Session
+                _cartServiceSession.ClearCart();
+            }
+            else
+            {
+                // Logged In -> Database
+
+                var cart = await _cartService
+                    .GetCartByUserIdAsync(userId);
+
+                foreach (var item in cart.Items.ToList())
+                {
+                    await _cartService.RemoveFromCartAsync(
+                        userId,
+                        item.Id);
+                }
+            }
 
             return RedirectToAction(nameof(Index));
         }

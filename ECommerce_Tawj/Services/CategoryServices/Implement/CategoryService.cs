@@ -3,6 +3,7 @@ using ECommerce_Tawj.DTOs.CategoryDTOs;
 using ECommerce_Tawj.Models;
 using ECommerce_Tawj.Reposatory.Interfaces;
 using ECommerce_Tawj.Services.CategoryServices.Interfaces;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace ECommerce_Tawj.Services.CategoryServices.Implement
 {
@@ -10,11 +11,14 @@ namespace ECommerce_Tawj.Services.CategoryServices.Implement
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IMemoryCache _memoryCache;
+        private const string CategoriesCacheKey = "categories";
 
-        public CategoryService(IUnitOfWork unitOfWork, IMapper mapper)
+        public CategoryService(IUnitOfWork unitOfWork, IMapper mapper,IMemoryCache memoryCache)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _memoryCache = memoryCache;
         }
 
         public async Task AddCategoryAsync(AddCategoryDTO model)
@@ -22,11 +26,22 @@ namespace ECommerce_Tawj.Services.CategoryServices.Implement
             var category = _mapper.Map<Category>(model);
             _unitOfWork.CategoryRepo.Add(category);
             await _unitOfWork.SaveChangesAsync();
+            _memoryCache.Remove(CategoriesCacheKey);
         }
         public async Task<IEnumerable<CategoryDTO>> GetAllCategoriesAsync()
         {
-            var categories = await _unitOfWork.CategoryRepo.GetCategoriesWithProductsAsync();
-            return _mapper.Map<IEnumerable<CategoryDTO>>(categories);
+            if(_memoryCache.TryGetValue(CategoriesCacheKey,out IEnumerable<CategoryDTO>? categories))
+            {
+                return categories!;
+            }
+            var categoriesFromDb = await _unitOfWork.CategoryRepo.GetCategoriesWithProductsAsync();
+            var result = _mapper.Map<IEnumerable<CategoryDTO>>(categoriesFromDb);
+            var options = new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30)
+            };
+            _memoryCache.Set(CategoriesCacheKey, result, options);
+            return result;
         }
         public async Task<CategoryDTO?> GetCategoryByIdAsync(int id)
         {
@@ -41,6 +56,7 @@ namespace ECommerce_Tawj.Services.CategoryServices.Implement
                 _mapper.Map(categoryDto, category);
                 _unitOfWork.CategoryRepo.Update(category);
                 await _unitOfWork.SaveChangesAsync();
+                _memoryCache.Remove(CategoriesCacheKey);
             }
         }
         public async Task<bool> DeleteCategoryAsync(int id)
@@ -50,6 +66,7 @@ namespace ECommerce_Tawj.Services.CategoryServices.Implement
 
             await _unitOfWork.CategoryRepo.DeleteAsync(id);
             await _unitOfWork.SaveChangesAsync();
+            _memoryCache.Remove(CategoriesCacheKey);
             return true;
         }
     }

@@ -4,6 +4,7 @@ using ECommerce_Tawj.DTOs.HomeDTOs;
 using ECommerce_Tawj.DTOs.ProductsDTOs;
 using ECommerce_Tawj.Models;
 using ECommerce_Tawj.Reposatory.Interfaces;
+using ECommerce_Tawj.Services.CategoryServices.Interfaces;
 using ECommerce_Tawj.Services.FavoriteService.Interface;
 using ECommerce_Tawj.Services.FilesService;
 using ECommerce_Tawj.Services.ProductServices.Interfaces;
@@ -17,16 +18,19 @@ namespace ECommerce_Tawj.Services.ProductServices.Implement
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IFileService _fileService;
-        private readonly IFavoriteService _favoriteService; 
+        private readonly IFavoriteService _favoriteService;
+        private readonly ICategoryService _categoryService;
         public ProductServices(IUnitOfWork unitOfWork,
             IMapper mapper,
             IFileService fileService,
-            IFavoriteService favoriteService)
+            IFavoriteService favoriteService,
+            ICategoryService categoryService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _fileService = fileService;
             _favoriteService = favoriteService;
+            _categoryService = categoryService;
         }
         public Task<IEnumerable<Product>> GetProductWithCategoriesWithProImagesAsync()
         {
@@ -83,7 +87,13 @@ namespace ECommerce_Tawj.Services.ProductServices.Implement
             return _mapper.Map<ProductDetailsDTO>(product);
         }
 
-        public async Task<ShopDTO> GetShopProductsAsync(string? searchTerm, int? categoryId, string? userId, int pageNumber = 1, int pageSize = 9)
+        public async Task<ShopDTO> GetShopProductsAsync(
+                                                         string? searchTerm,
+                                                         int? categoryId,
+                                                         string? userId,
+                                                         string? sortOrder,
+                                                         int pageNumber = 1,
+                                                         int pageSize = 9)
         {
             var query =  _unitOfWork.ProductRepo.GetAllQueryable(); // IQeryable include category
             if (!string.IsNullOrWhiteSpace(searchTerm))
@@ -96,6 +106,29 @@ namespace ECommerce_Tawj.Services.ProductServices.Implement
             {
                 query = query.Where(p => p.CategoryId == categoryId.Value);
             }
+            switch (sortOrder)
+            {
+                case "name_asc":
+                    query = query.OrderBy(p => p.Name);
+                    break;
+
+                case "name_desc":
+                    query = query.OrderByDescending(p => p.Name);
+                    break;
+
+                case "price_asc":
+                    query = query.OrderBy(p => p.Price);
+                    break;
+
+                case "price_desc":
+                    query = query.OrderByDescending(p => p.Price);
+                    break;
+
+                default:
+                    query = query.OrderBy(p => p.Id);
+                    break;
+            }
+
             int totalProducts = await query.CountAsync();
             int totalPages = (int)Math.Ceiling(totalProducts / (double)pageSize);
 
@@ -124,8 +157,7 @@ namespace ECommerce_Tawj.Services.ProductServices.Implement
                 IsFavorite = favoriteProductIds.Contains(p.Id)
             }).ToList();
 
-            var categories = await _unitOfWork.CategoryRepo.GetAllAsync(null);
-            var categoryDtos = categories.Select(c => new CategoryDTO { Id = c.Id, Name = c.Name }).ToList();
+            var categoryDtos = await _categoryService.GetAllCategoriesAsync();
 
             return new ShopDTO
             {
@@ -133,6 +165,7 @@ namespace ECommerce_Tawj.Services.ProductServices.Implement
                 Categories = categoryDtos,
                 SelectedCategoryId = categoryId,
                 SearchTerm = searchTerm ?? string.Empty,
+                SortOrder = sortOrder,
                 PageNumber = pageNumber,
                 TotalPages = totalPages
             };

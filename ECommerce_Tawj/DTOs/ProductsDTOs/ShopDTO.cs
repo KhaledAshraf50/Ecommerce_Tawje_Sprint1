@@ -10,6 +10,7 @@ namespace ECommerce_Tawj.DTOs.ProductsDTOs
         public string SearchTerm { get; set; } = string.Empty;
         public int PageNumber { get; set; } = 1;
         public int TotalPages { get; set; }
+        public string? SortOrder { get; set; }
         public bool HasPreviousPage => PageNumber > 1;
         public bool HasNextPage => PageNumber < TotalPages;
     }
