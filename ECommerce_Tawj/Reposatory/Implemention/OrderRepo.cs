@@ -15,6 +15,14 @@ namespace ECommerce_Tawj.Reposatory.Implemention
                     .ThenInclude(oi => oi.Product)
                 .FirstOrDefaultAsync(o => o.Id == orderId && o.UserId == userId);
         }
+        public async Task<Order?> GetOrderWithItemsByIdWithUserAsync(int orderId, string userId)
+        {
+            return await _context.Orders
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product)
+                    .Include(o=>o.User)
+                .FirstOrDefaultAsync(o => o.Id == orderId && o.UserId == userId);
+        }
         public async Task<IEnumerable<Order>> GetAllOrdersWithDetailsAsync()
         {
             return await _context.Orders

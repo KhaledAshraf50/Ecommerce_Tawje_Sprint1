@@ -5,10 +5,8 @@ namespace ECommerce_Tawj.Models
 {
     public class ProductImage
     {
-        [Key]
-        public int Id { get; set; }
 
-        [Required(ErrorMessage = "Image URL is required.")]
+        public int Id { get; set; }
         public string ImageUrl { get; set; } = string.Empty;
         public bool IsMain { get; set; } = false;
         // Foreign Key

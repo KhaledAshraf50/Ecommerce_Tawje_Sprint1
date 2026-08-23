@@ -1,7 +1,9 @@
 ﻿using AspNetCoreGeneratedDocument;
 using ECommerce_Tawj.DTOs.OrdersDTOs;
+using ECommerce_Tawj.DTOs.UserDTOs;
 using ECommerce_Tawj.Models;
 using ECommerce_Tawj.Services.CartServices.Interfaces;
+using ECommerce_Tawj.Services.EmailService;
 using ECommerce_Tawj.Services.OrderServices.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,11 +18,13 @@ namespace ECommerce_Tawj.Controllers
         private readonly IOrderService _orderService;
         private readonly ICartService _cartService;
         private readonly IConfiguration _configuration;
-        public OrderController(IOrderService orderService, ICartService cartService, IConfiguration configuration)
+        private readonly IEmailService _emailService;
+        public OrderController(IOrderService orderService, ICartService cartService, IConfiguration configuration, IEmailService emailService)
         {
             _orderService = orderService;
             _cartService = cartService;
             _configuration = configuration;
+            _emailService = emailService;
 
             StripeConfiguration.ApiKey = _configuration["Stripe:SecretKey"];
         }
@@ -81,6 +85,7 @@ namespace ECommerce_Tawj.Controllers
             {
                 // COD (Cash On Delivery)
                 return RedirectToAction(nameof(Confirmation), new { orderId = order.Id });
+                   
             }
 
         }
@@ -95,12 +100,27 @@ namespace ECommerce_Tawj.Controllers
         public async Task<IActionResult> Confirmation(int orderId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var order = await _orderService.GetOrderByIdAsync(orderId, userId!);
+            var order = await _orderService.GetOrderByIdWithUserAsync(orderId, userId!);
 
             if (order == null)
             {
                 return NotFound();
             }
+
+            var filePath = $"{Directory.GetCurrentDirectory()}\\EmailTemplete\\ConfirmationEmail.cshtml";
+            var str = new StreamReader(filePath);
+
+            var mailText = str.ReadToEnd();
+
+            str.Close();
+            mailText = mailText.Replace("[OrderID]",order.Id.ToString())
+                               .Replace("[UserName]", order.ShippingFirstName + " " + order.ShippingLastName)
+                               .Replace("[PaymentMethod]", order.PaymentMethod)
+                               .Replace("[ShippingAddress]", order.ShippingAddress + " " + order.ShippingCity)
+                               .Replace("[TotalAmount]", order.TotalAmount.ToString())
+                               .Replace("[OrderDate]", order.OrderDate.ToString());
+
+            await _emailService.SendEmailAsync(order.User.Email, "Tawj Store Successful Order", mailText);
 
             return View(order);
         }

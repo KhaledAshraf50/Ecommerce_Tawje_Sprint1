@@ -1,6 +1,7 @@
 ﻿using ECommerce_Tawj.DTOs.HomeDTOs;
 using ECommerce_Tawj.DTOs.ProductsDTOs;
 using ECommerce_Tawj.Models;
+using ECommerce_Tawj.ViewModels.ProductsVM;
 
 namespace ECommerce_Tawj.Services.ProductServices.Interfaces
 {
@@ -12,8 +13,7 @@ namespace ECommerce_Tawj.Services.ProductServices.Interfaces
 
         Task<ProductDetailsDTO?> GetProductDetailsByIdAsync(int productId);
 
-        Task<ShopDTO> GetShopProductsAsync(
-                                           string? searchTerm,
+        Task<ShopDTO> GetShopProductsAsync(string? searchTerm,
                                            int? categoryId,
                                            string? userId,
                                            string? sortOrder,
@@ -23,5 +23,8 @@ namespace ECommerce_Tawj.Services.ProductServices.Interfaces
         Task<ProductEditDTO?> GetProductForEditAsync(int id);
         Task UpdateProductAsync(ProductEditDTO model);
         Task<bool> DeleteProductAsync(int id);
+
+        Task<IEnumerable<ProductDTO>> GetDeletedProductsAsync();
+        Task<bool> RestoreProductAsync(int id);
     }
 }

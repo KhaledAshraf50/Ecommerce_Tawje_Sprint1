@@ -4,6 +4,7 @@ using ECommerce_Tawj.DTOs.CartItemDTOs;
 using ECommerce_Tawj.DTOs.CategoryDTOs;
 using ECommerce_Tawj.DTOs.OrdersDTOs;
 using ECommerce_Tawj.DTOs.ProductsDTOs;
+using ECommerce_Tawj.DTOs.ReviewDTOs;
 using ECommerce_Tawj.Models;
 using ECommerce_Tawj.ViewModels.ProductsVM;
 
@@ -107,6 +108,10 @@ namespace ECommerce_Tawj.Profiles
                          ? src.Images.FirstOrDefault()!.ImageUrl
                          : "/uploads/products/default.png"));
 
+            CreateMap<AddReviewDTO,Review>();
+            CreateMap<Review, ReviewDTO>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.FullName));
+            CreateMap<EditReviewDTO, Review>();
         }
     }
 }

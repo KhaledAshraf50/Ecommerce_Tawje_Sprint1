@@ -10,6 +10,7 @@ namespace ECommerce_Tawj.Reposatory.Interfaces
         IFavoriteRepo FavoriteRepo { get; }
         ICartRepo CartRepo { get; }
         IOrderRepo OrderRepo { get; }
+        IReviewRepo ReviewRepo { get; }
         Task<int> SaveChangesAsync();
     }
 }

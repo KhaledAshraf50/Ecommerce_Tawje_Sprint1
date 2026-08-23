@@ -62,6 +62,12 @@ namespace ECommerce_Tawj.Services.ProductServices.Implement
             // تعليم المنتجات المفضلة
             foreach (var dto in allProductDtos)
             {
+                var product = products.First(p => p.Id == dto.Id);
+
+                dto.AverageRating = product.Reviews.Any()
+                    ? product.Reviews.Average(r => r.Rating)
+                    : 0;
+
                 dto.IsFavorite = favoriteProductIds.Contains(dto.Id);
             }
 
@@ -84,11 +90,21 @@ namespace ECommerce_Tawj.Services.ProductServices.Implement
         {
             var product = await _unitOfWork.ProductRepo.GetProductWithDetailsByIdAsync(productId);
             if (product == null) return null;
-            return _mapper.Map<ProductDetailsDTO>(product);
+            var productDto = _mapper.Map<ProductDetailsDTO>(product);
+
+            var reviews = await _unitOfWork.ReviewRepo.GetProductReviewsAsync(productId);
+
+            productDto.Reviews = reviews;
+
+            productDto.ReviewCount = reviews.Count();
+
+            productDto.AverageRating = reviews.Any()
+            ? reviews.Average(r => r.Rating)
+            : 0;
+            return productDto;
         }
 
-        public async Task<ShopDTO> GetShopProductsAsync(
-                                                         string? searchTerm,
+        public async Task<ShopDTO> GetShopProductsAsync(string? searchTerm,
                                                          int? categoryId,
                                                          string? userId,
                                                          string? sortOrder,
@@ -243,6 +259,27 @@ namespace ECommerce_Tawj.Services.ProductServices.Implement
             }
             await _unitOfWork.ProductRepo.DeleteAsync(id);
             await _unitOfWork.SaveChangesAsync();
+            return true;
+        }
+        public async Task<IEnumerable<ProductDTO>> GetDeletedProductsAsync()
+        {
+            var products = await _unitOfWork.ProductRepo
+                .GetDeletedProductsAsync();
+
+            return _mapper.Map<IEnumerable<ProductDTO>>(products);
+        }
+        public async Task<bool> RestoreProductAsync(int id)
+        {
+            var product = await _unitOfWork.ProductRepo
+                .GetDeletedProductByIdAsync(id);
+
+            if (product == null)
+                return false;
+
+            product.IsDeleted = false;
+
+            await _unitOfWork.SaveChangesAsync();
+
             return true;
         }
     }

@@ -54,7 +54,9 @@ namespace ECommerce_Tawj.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("IsLocked")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -122,9 +124,10 @@ namespace ECommerce_Tawj.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
-
                     b.HasIndex("UserId");
+
+                    b.HasIndex("ProductId", "UserId")
+                        .IsUnique();
 
                     b.ToTable("CartItems");
                 });
@@ -137,14 +140,25 @@ namespace ECommerce_Tawj.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -173,7 +187,8 @@ namespace ECommerce_Tawj.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId", "ProductId")
+                        .IsUnique();
 
                     b.ToTable("Favorites");
                 });
@@ -276,7 +291,9 @@ namespace ECommerce_Tawj.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<double>("AverageRating")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<string>("Brand")
                         .IsRequired()
@@ -286,12 +303,25 @@ namespace ECommerce_Tawj.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CategoryId1")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DiscountPercentage")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -302,11 +332,18 @@ namespace ECommerce_Tawj.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("StockQuantity")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("CategoryId1");
 
                     b.ToTable("Products");
                 });
@@ -334,6 +371,55 @@ namespace ECommerce_Tawj.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImages");
+                });
+
+            modelBuilder.Entity("ECommerce_Tawj.Models.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductId1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rating")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(5);
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId1");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("ProductId", "UserId")
+                        .IsUnique();
+
+                    b.ToTable("Review");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -512,7 +598,7 @@ namespace ECommerce_Tawj.Migrations
                     b.HasOne("ECommerce_Tawj.Models.ApplicationUser", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -529,7 +615,7 @@ namespace ECommerce_Tawj.Migrations
                     b.HasOne("ECommerce_Tawj.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -540,10 +626,14 @@ namespace ECommerce_Tawj.Migrations
             modelBuilder.Entity("ECommerce_Tawj.Models.Product", b =>
                 {
                     b.HasOne("ECommerce_Tawj.Models.Category", "Category")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("ECommerce_Tawj.Models.Category", null)
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId1");
 
                     b.Navigation("Category");
                 });
@@ -557,6 +647,29 @@ namespace ECommerce_Tawj.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("ECommerce_Tawj.Models.Review", b =>
+                {
+                    b.HasOne("ECommerce_Tawj.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ECommerce_Tawj.Models.Product", null)
+                        .WithMany("Reviews")
+                        .HasForeignKey("ProductId1");
+
+                    b.HasOne("ECommerce_Tawj.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -630,6 +743,8 @@ namespace ECommerce_Tawj.Migrations
             modelBuilder.Entity("ECommerce_Tawj.Models.Product", b =>
                 {
                     b.Navigation("Images");
+
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

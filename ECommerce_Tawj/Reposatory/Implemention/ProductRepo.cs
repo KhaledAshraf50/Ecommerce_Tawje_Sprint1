@@ -25,6 +25,7 @@ namespace ECommerce_Tawj.Reposatory.Implemention
             return await _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.Images)
+                //.Include(p=>p.Reviews)
                 .ToListAsync();
         }
 
@@ -41,6 +42,24 @@ namespace ECommerce_Tawj.Reposatory.Implemention
             return await _context.Products
                 .Include(p => p.Images)
                 .FirstOrDefaultAsync(p => p.Id == id);
+        }
+        public async Task<IEnumerable<Product>> GetDeletedProductsAsync()
+        {
+            return await _context.Products
+                .IgnoreQueryFilters()
+                .Where(p => p.IsDeleted)
+                .Include(p => p.Category)
+                .Include(p => p.Images)
+                .ToListAsync();
+        }
+
+        public async Task<Product?> GetDeletedProductByIdAsync(int id)
+        {
+            return await _context.Products
+                .IgnoreQueryFilters()
+                .Include(p => p.Category)
+                .Where(p=>p.IsDeleted)
+                .FirstOrDefaultAsync(p=>p.Id == id);
         }
     }
 }

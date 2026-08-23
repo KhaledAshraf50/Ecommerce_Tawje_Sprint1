@@ -126,6 +126,10 @@ namespace ECommerce_Tawj.Services.OrderServices.Implement
         {
             return await _unitOfWork.OrderRepo.GetOrderWithItemsByIdAsync(orderId, userId);
         }
+        public async Task<Order?> GetOrderByIdWithUserAsync(int orderId, string userId)
+        {
+            return await _unitOfWork.OrderRepo.GetOrderWithItemsByIdWithUserAsync(orderId, userId);
+        }
 
         public async Task<IEnumerable<UserOrderDTO>> GetUserOrdersAsync(string userId)
         {

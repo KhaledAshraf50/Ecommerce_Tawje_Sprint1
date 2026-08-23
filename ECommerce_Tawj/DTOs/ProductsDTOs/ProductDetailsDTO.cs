@@ -1,4 +1,6 @@
-﻿namespace ECommerce_Tawj.DTOs.ProductsDTOs
+﻿using ECommerce_Tawj.DTOs.ReviewDTOs;
+
+namespace ECommerce_Tawj.DTOs.ProductsDTOs
 {
     public class ProductDetailsDTO
     {
@@ -17,5 +19,9 @@
         public string CategoryName { get; set; } = string.Empty;
         public int StockQuantity { get; set; }
         public List<ProductImageDTO> Images { get; set; } = new();
+
+        public IEnumerable<ReviewDTO> Reviews { get; set; } = new List<ReviewDTO>();
+
+        public int ReviewCount { get; set; }
     }
 }

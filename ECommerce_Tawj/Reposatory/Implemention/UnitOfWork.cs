@@ -1,4 +1,5 @@
-﻿using ECommerce_Tawj.Models;
+﻿using AutoMapper;
+using ECommerce_Tawj.Models;
 using ECommerce_Tawj.Models.Data;
 using ECommerce_Tawj.Reposatory.Interfaces;
 
@@ -14,8 +15,10 @@ namespace ECommerce_Tawj.Reposatory.Implemention
         public ICartRepo CartRepo { get; private set; }
         public IOrderRepo OrderRepo { get; private set; }
 
+        public IReviewRepo ReviewRepo {  get; private set; }
 
-        public UnitOfWork(ApplicationDbContext context)
+
+        public UnitOfWork(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             ProductRepo = new ProductRepo(_context);
@@ -24,6 +27,7 @@ namespace ECommerce_Tawj.Reposatory.Implemention
             FavoriteRepo = new FavoriteRepo(_context);
             CartRepo = new CartRepo(_context);
             OrderRepo = new OrderRepo(_context);
+            ReviewRepo = new ReviewRepo(_context,mapper);
         }
         public Task<int> SaveChangesAsync()
         {

@@ -10,6 +10,7 @@ using ECommerce_Tawj.Services.CartServices.Implement;
 using ECommerce_Tawj.Services.CartServices.Interfaces;
 using ECommerce_Tawj.Services.CategoryServices.Implement;
 using ECommerce_Tawj.Services.CategoryServices.Interfaces;
+using ECommerce_Tawj.Services.EmailService;
 using ECommerce_Tawj.Services.FavoriteService.Implement;
 using ECommerce_Tawj.Services.FavoriteService.Interface;
 using ECommerce_Tawj.Services.FilesService;
@@ -17,6 +18,8 @@ using ECommerce_Tawj.Services.OrderServices.Implement;
 using ECommerce_Tawj.Services.OrderServices.Interfaces;
 using ECommerce_Tawj.Services.ProductServices.Implement;
 using ECommerce_Tawj.Services.ProductServices.Interfaces;
+using ECommerce_Tawj.Services.ReviewServices.Implement;
+using ECommerce_Tawj.Services.ReviewServices.Interfaces;
 using ECommerce_Tawj.Services.UserServices.Implement;
 using ECommerce_Tawj.Services.UserServices.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -58,6 +61,8 @@ builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IFileService, LocalFileService>();
 builder.Services.AddScoped<ICartServiceSession, CartServiceSession>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IReviewService, ReviewsService>();
 
 // Add Session Settings For Task2 Sprint2
 
@@ -73,7 +78,9 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddMemoryCache();
 
+// add SmtpSettings
 
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
 
 
 var app = builder.Build();
