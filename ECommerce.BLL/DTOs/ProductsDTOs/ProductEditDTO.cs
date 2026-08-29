@@ -1,4 +1,5 @@
 ﻿using ECommerce_Tawj.DTOs.CategoryDTOs;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace ECommerce_Tawj.DTOs.ProductsDTOs

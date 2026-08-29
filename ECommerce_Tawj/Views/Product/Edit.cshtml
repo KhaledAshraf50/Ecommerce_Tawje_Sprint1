@@ -1,4 +1,5 @@
 ﻿@using ECommerce_Tawj.DTOs.ProductsDTOs
+
 @model ProductEditDTO
 
 @{
@@ -38,7 +39,10 @@
 
                 <div class="col-md-6">
                     <label class="form-label text-secondary small fw-bold">Change Image</label>
-                    <input asp-for="NewImage" class="form-control" type="file" accept="image/*" />
+                    <input asp-for="NewImage"
+                           class="form-control"
+                           type="file"
+                           accept="image/*" />
                 </div>
 
                 <div class="col-12">
