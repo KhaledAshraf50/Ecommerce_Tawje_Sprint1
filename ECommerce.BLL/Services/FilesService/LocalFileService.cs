@@ -1,4 +1,7 @@
-﻿namespace ECommerce_Tawj.Services.FilesService
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+
+namespace ECommerce_Tawj.Services.FilesService
 {
     public class LocalFileService : IFileService
     {

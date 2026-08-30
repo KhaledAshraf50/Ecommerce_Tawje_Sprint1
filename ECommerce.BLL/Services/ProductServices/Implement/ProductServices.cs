@@ -8,6 +8,7 @@ using ECommerce_Tawj.Services.FavoriteService.Interface;
 using ECommerce_Tawj.Services.FilesService;
 using ECommerce_Tawj.Services.ProductServices.Interfaces;
 using ECommerce_Tawj.ViewModels.ProductsVM;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 
 namespace ECommerce_Tawj.Services.ProductServices.Implement

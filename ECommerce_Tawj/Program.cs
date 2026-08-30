@@ -1,5 +1,7 @@
+
 using ECommerce_Tawj.Models;
 using ECommerce_Tawj.Models.Data;
+using ECommerce_Tawj.Profiles;
 using ECommerce_Tawj.Reposatory.Implemention;
 using ECommerce_Tawj.Reposatory.Interfaces;
 using ECommerce_Tawj.Services.AccountServices.Implement;
@@ -46,7 +48,7 @@ StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 // regester the UnitOfWork 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Add AutoMapper
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 // add services 
 builder.Services.AddScoped<IProductService, ProductServices>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();

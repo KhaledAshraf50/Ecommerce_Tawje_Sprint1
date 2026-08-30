@@ -1,4 +1,6 @@
-﻿namespace ECommerce_Tawj.Services.FilesService
+﻿using Microsoft.AspNetCore.Http;
+
+namespace ECommerce_Tawj.Services.FilesService
 {
     public interface IFileService
     {

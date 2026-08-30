@@ -1,7 +1,6 @@
 ﻿using ECommerce_Tawj.Models;
 using ECommerce_Tawj.Models.Data;
 using ECommerce_Tawj.Reposatory.Interfaces;
-using ECommerce_Tawj.ViewModels.ProductsVM;
 using Microsoft.EntityFrameworkCore;
 
 namespace ECommerce_Tawj.Reposatory.Implemention
