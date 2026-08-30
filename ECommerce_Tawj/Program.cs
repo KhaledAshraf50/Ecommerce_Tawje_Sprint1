@@ -24,6 +24,7 @@ using ECommerce_Tawj.Services.ReviewServices.Implement;
 using ECommerce_Tawj.Services.ReviewServices.Interfaces;
 using ECommerce_Tawj.Services.UserServices.Implement;
 using ECommerce_Tawj.Services.UserServices.Interfaces;
+using ECommerceBLL.DataSeeder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Stripe;
@@ -116,6 +117,19 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
+// Data Seeding
 
+using(var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        await DbSeeder.SeedRolesAndAdminAsync(services);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error seeding data : {ex.Message}");
+    }
+}
 
 app.Run();
