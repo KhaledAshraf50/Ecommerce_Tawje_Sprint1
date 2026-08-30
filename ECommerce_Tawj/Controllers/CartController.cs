@@ -106,19 +106,7 @@ namespace ECommerce_Tawj.Controllers
             }
             else
             {
-                // Logged In -> Database
-                var cart = await _cartService
-                    .GetCartByUserIdAsync(userId);
-
-                var item = cart.Items
-                    .FirstOrDefault(x => x.ProductId == productId);
-
-                if (item != null)
-                {
-                    await _cartService.RemoveFromCartAsync(
-                        userId,
-                        item.Id);
-                }
+                await _cartService.RemoveProductFromCartAsync(userId, productId);
             }
 
             return RedirectToAction(nameof(Index));
@@ -137,15 +125,7 @@ namespace ECommerce_Tawj.Controllers
             {
                 // Logged In -> Database
 
-                var cart = await _cartService
-                    .GetCartByUserIdAsync(userId);
-
-                foreach (var item in cart.Items.ToList())
-                {
-                    await _cartService.RemoveFromCartAsync(
-                        userId,
-                        item.Id);
-                }
+                await _cartService.ClearCartAsync(userId);
             }
 
             return RedirectToAction(nameof(Index));

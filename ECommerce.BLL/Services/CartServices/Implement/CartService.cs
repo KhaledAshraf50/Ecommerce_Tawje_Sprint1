@@ -79,5 +79,28 @@ namespace ECommerce_Tawj.Services.CartServices.Implement
             var items = await _unitOfWork.CartRepo.GetCartItemsByUserIdAsync(userId);
             return items.Sum(i => i.Quantity); // حساب مجموع كميات المنتجات
         }
+
+        public async Task RemoveProductFromCartAsync(string userId, int productId)
+        {
+            var existingItem = await _unitOfWork.CartRepo
+                .FirstOrDefaultAsync(c => c.UserId == userId && c.ProductId == productId);
+
+            if (existingItem != null)
+            {
+                await _unitOfWork.CartRepo.DeleteAsync(existingItem.Id);
+                await _unitOfWork.SaveChangesAsync();
+            }
+        }
+        public async Task ClearCartAsync(string userId)
+        {
+            var items = await _unitOfWork.CartRepo.GetCartItemsByUserIdAsync(userId);
+
+            foreach (var item in items)
+            {
+                await _unitOfWork.CartRepo.DeleteAsync(item.Id);
+            }
+
+            await _unitOfWork.SaveChangesAsync();
+        }
     }
 }
