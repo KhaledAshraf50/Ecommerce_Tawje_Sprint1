@@ -33,14 +33,7 @@ namespace ECommerce_Tawj.Controllers
             var result = await _accountService.RegisterAsync(userDTO);
             if (result.Succeeded)
             {
-                var filePath = $"{Directory.GetCurrentDirectory()}\\EmailTemplete\\WelcomeEmail.cshtml";
-                var str = new StreamReader(filePath);
-
-                var mailText = str.ReadToEnd();
-
-                str.Close();
-                mailText = mailText.Replace("[UserName]", userDTO.fullName);
-                await _emailService.SendEmailAsync(userDTO.Email,"Tawj Store Successful Registration", mailText);
+              
                 return RedirectToAction("Login");
             }
             foreach(var error in result.Errors)

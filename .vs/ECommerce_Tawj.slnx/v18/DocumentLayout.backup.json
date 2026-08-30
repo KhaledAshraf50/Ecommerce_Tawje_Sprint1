@@ -7,6 +7,22 @@
       "RelativeMoniker": "D:0:0:{34491EE7-9BD0-4B3B-61EC-ED3FEF245B60}|ECommerce_Tawj\\ECommerce_Tawj.csproj|solutionrelative:ecommerce_tawj\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{34491EE7-9BD0-4B3B-61EC-ED3FEF245B60}|ECommerce_Tawj\\ECommerce_Tawj.csproj|d:\\tawje\\ecommerce_tawj\\ecommerce_tawj\\controllers\\errorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34491EE7-9BD0-4B3B-61EC-ED3FEF245B60}|ECommerce_Tawj\\ECommerce_Tawj.csproj|solutionrelative:ecommerce_tawj\\controllers\\errorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34491EE7-9BD0-4B3B-61EC-ED3FEF245B60}|ECommerce_Tawj\\ECommerce_Tawj.csproj|d:\\tawje\\ecommerce_tawj\\ecommerce_tawj\\views\\account\\accessdenied.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{34491EE7-9BD0-4B3B-61EC-ED3FEF245B60}|ECommerce_Tawj\\ECommerce_Tawj.csproj|solutionrelative:ecommerce_tawj\\views\\account\\accessdenied.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34491EE7-9BD0-4B3B-61EC-ED3FEF245B60}|ECommerce_Tawj\\ECommerce_Tawj.csproj|d:\\tawje\\ecommerce_tawj\\ecommerce_tawj\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34491EE7-9BD0-4B3B-61EC-ED3FEF245B60}|ECommerce_Tawj\\ECommerce_Tawj.csproj|solutionrelative:ecommerce_tawj\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34491EE7-9BD0-4B3B-61EC-ED3FEF245B60}|ECommerce_Tawj\\ECommerce_Tawj.csproj|d:\\tawje\\ecommerce_tawj\\ecommerce_tawj\\views\\shared\\notfound.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{34491EE7-9BD0-4B3B-61EC-ED3FEF245B60}|ECommerce_Tawj\\ECommerce_Tawj.csproj|solutionrelative:ecommerce_tawj\\views\\shared\\notfound.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3DD159A0-905D-48A0-99F6-4AEF3D386230}|ECommerce.DAL\\ECommerceDAL.csproj|d:\\tawje\\ecommerce_tawj\\ecommerce.dal\\reposatory\\implemention\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3DD159A0-905D-48A0-99F6-4AEF3D386230}|ECommerce.DAL\\ECommerceDAL.csproj|solutionrelative:ecommerce.dal\\reposatory\\implemention\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -74,7 +90,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -91,6 +107,88 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "ErrorController.cs",
+              "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Controllers\\ErrorController.cs",
+              "RelativeDocumentMoniker": "ECommerce_Tawj\\Controllers\\ErrorController.cs",
+              "ToolTip": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Controllers\\ErrorController.cs",
+              "RelativeToolTip": "ECommerce_Tawj\\Controllers\\ErrorController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-30T15:25:51.323Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AccessDenied.cshtml",
+              "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Views\\Account\\AccessDenied.cshtml",
+              "RelativeDocumentMoniker": "ECommerce_Tawj\\Views\\Account\\AccessDenied.cshtml",
+              "ToolTip": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Views\\Account\\AccessDenied.cshtml",
+              "RelativeToolTip": "ECommerce_Tawj\\Views\\Account\\AccessDenied.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-30T15:24:49.626Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "ECommerce_Tawj\\Controllers\\AccountController.cs",
+              "ToolTip": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Controllers\\AccountController.cs*",
+              "RelativeToolTip": "ECommerce_Tawj\\Controllers\\AccountController.cs*",
+              "ViewState": "AgIAADAAAAAAAAAAAAAowFEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-30T15:23:46.698Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "NotFound.cshtml",
+              "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Views\\Shared\\NotFound.cshtml",
+              "RelativeDocumentMoniker": "ECommerce_Tawj\\Views\\Shared\\NotFound.cshtml",
+              "ToolTip": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Views\\Shared\\NotFound.cshtml",
+              "RelativeToolTip": "ECommerce_Tawj\\Views\\Shared\\NotFound.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAADEAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-30T15:21:10.081Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "20260819165052_Sprint3_AdvancedDataLayer.cs",
+              "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce.DAL\\Migrations\\20260819165052_Sprint3_AdvancedDataLayer.cs",
+              "RelativeDocumentMoniker": "ECommerce.DAL\\Migrations\\20260819165052_Sprint3_AdvancedDataLayer.cs",
+              "ToolTip": "D:\\Tawje\\ECommerce_Tawj\\ECommerce.DAL\\Migrations\\20260819165052_Sprint3_AdvancedDataLayer.cs",
+              "RelativeToolTip": "ECommerce.DAL\\Migrations\\20260819165052_Sprint3_AdvancedDataLayer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-30T14:29:49.386Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Program.cs",
+              "RelativeDocumentMoniker": "ECommerce_Tawj\\Program.cs",
+              "ToolTip": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Program.cs",
+              "RelativeToolTip": "ECommerce_Tawj\\Program.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAIwGYAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-30T07:13:59.749Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "UnitOfWork.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce.DAL\\Reposatory\\Implemention\\UnitOfWork.cs",
               "RelativeDocumentMoniker": "ECommerce.DAL\\Reposatory\\Implemention\\UnitOfWork.cs",
@@ -103,24 +201,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "20260819165052_Sprint3_AdvancedDataLayer.cs",
-              "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce.DAL\\Migrations\\20260819165052_Sprint3_AdvancedDataLayer.cs",
-              "RelativeDocumentMoniker": "ECommerce.DAL\\Migrations\\20260819165052_Sprint3_AdvancedDataLayer.cs",
-              "ToolTip": "D:\\Tawje\\ECommerce_Tawj\\ECommerce.DAL\\Migrations\\20260819165052_Sprint3_AdvancedDataLayer.cs",
-              "RelativeToolTip": "ECommerce.DAL\\Migrations\\20260819165052_Sprint3_AdvancedDataLayer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-30T14:29:49.386Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "ProductServices.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce.BLL\\Services\\ProductServices\\Implement\\ProductServices.cs",
               "RelativeDocumentMoniker": "ECommerce.BLL\\Services\\ProductServices\\Implement\\ProductServices.cs",
@@ -133,20 +214,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Program.cs",
-              "RelativeDocumentMoniker": "ECommerce_Tawj\\Program.cs",
-              "ToolTip": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Program.cs",
-              "RelativeToolTip": "ECommerce_Tawj\\Program.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAIwDUAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-30T07:13:59.749Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "ReviewRepo.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce.DAL\\Reposatory\\Implemention\\ReviewRepo.cs",
               "RelativeDocumentMoniker": "ECommerce.DAL\\Reposatory\\Implemention\\ReviewRepo.cs",
@@ -159,7 +227,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "ApplicationUserConfiguration.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce.DAL\\Models\\Data\\Configuration\\ApplicationUserConfiguration.cs",
               "RelativeDocumentMoniker": "ECommerce.DAL\\Models\\Data\\Configuration\\ApplicationUserConfiguration.cs",
@@ -172,7 +240,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "Review.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce.DAL\\Models\\Review.cs",
               "RelativeDocumentMoniker": "ECommerce.DAL\\Models\\Review.cs",
@@ -185,7 +253,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "EmailService.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce.BLL\\Services\\EmailService\\EmailService.cs",
               "RelativeDocumentMoniker": "ECommerce.BLL\\Services\\EmailService\\EmailService.cs",
@@ -198,7 +266,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "ReviewsService.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce.BLL\\Services\\ReviewServices\\Implement\\ReviewsService.cs",
               "RelativeDocumentMoniker": "ECommerce.BLL\\Services\\ReviewServices\\Implement\\ReviewsService.cs",
@@ -211,7 +279,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "IReviewService.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce.BLL\\Services\\ReviewServices\\Interfaces\\IReviewService.cs",
               "RelativeDocumentMoniker": "ECommerce.BLL\\Services\\ReviewServices\\Interfaces\\IReviewService.cs",
@@ -224,7 +292,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "OrderService.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce.BLL\\Services\\OrderServices\\Implement\\OrderService.cs",
               "RelativeDocumentMoniker": "ECommerce.BLL\\Services\\OrderServices\\Implement\\OrderService.cs",
@@ -237,7 +305,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "IReviewRepo.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce.DAL\\Reposatory\\Interfaces\\IReviewRepo.cs",
               "RelativeDocumentMoniker": "ECommerce.DAL\\Reposatory\\Interfaces\\IReviewRepo.cs",
@@ -250,7 +318,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "CartServiceSession.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce.BLL\\Services\\CartServices\\Implement\\CartServiceSession.cs",
               "RelativeDocumentMoniker": "ECommerce.BLL\\Services\\CartServices\\Implement\\CartServiceSession.cs",
@@ -263,7 +331,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "UserService.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce.BLL\\Services\\UserServices\\Implement\\UserService.cs",
               "RelativeDocumentMoniker": "ECommerce.BLL\\Services\\UserServices\\Implement\\UserService.cs",
@@ -276,7 +344,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "AccountServices.cs",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce.BLL\\Services\\AccountServices\\Implement\\AccountServices.cs",
               "RelativeDocumentMoniker": "ECommerce.BLL\\Services\\AccountServices\\Implement\\AccountServices.cs",
@@ -289,7 +357,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "D:\\Tawje\\ECommerce_Tawj\\ECommerce_Tawj\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "ECommerce_Tawj\\Views\\_ViewStart.cshtml",
