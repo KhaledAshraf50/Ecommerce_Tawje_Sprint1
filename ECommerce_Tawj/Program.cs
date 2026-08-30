@@ -1,5 +1,7 @@
+
 using ECommerce_Tawj.Models;
 using ECommerce_Tawj.Models.Data;
+using ECommerce_Tawj.Profiles;
 using ECommerce_Tawj.Reposatory.Implemention;
 using ECommerce_Tawj.Reposatory.Interfaces;
 using ECommerce_Tawj.Services.AccountServices.Implement;
@@ -44,12 +46,18 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Error/403";
+});
 // add Stripe Service
 StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 // regester the UnitOfWork 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Add AutoMapper
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddAutoMapper(cfg=> { },typeof(MappingProfile));
 // add services 
 builder.Services.AddScoped<IProductService, ProductServices>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
@@ -92,12 +100,14 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
 app.UseHttpsRedirection();
 app.MapStaticAssets();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseSession();

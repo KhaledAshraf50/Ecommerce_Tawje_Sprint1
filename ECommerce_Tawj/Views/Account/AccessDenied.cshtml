@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Access Denied - 403";
+}
+
+@section Styles {
+    <style>
+        :root {
+            --primary-orange: #f05423;
+            --primary-orange-hover: #d84315;
+        }
+
+        .error-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 50px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid #eaeaea;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .error-icon-box {
+            width: 90px;
+            height: 90px;
+            background-color: #fff3f0;
+            color: var(--primary-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .btn-orange {
+            background-color: var(--primary-orange);
+            color: white;
+            border: none;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+        }
+
+            .btn-orange:hover {
+                background-color: var(--primary-orange-hover);
+                color: white;
+            }
+    </style>
+}
+
+<section class="container my-5 text-center">
+    <div class="error-card">
+        <div class="error-icon-box">
+            <i class="fa-solid fa-user-shield fs-1"></i>
+        </div>
+        <h2 class="fw-bold text-dark mb-2">غير مصرح بالوصول 403</h2>
+        <p class="text-secondary mb-4">
+            عذراً ليس لديك الصلاحيات الكافية للوصول إلى هذه الصفحة أو تنفيذ هذا الإجراء.
+        </p>
+
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-orange rounded-pill px-4 py-2 fs-6">
+                <i class="fa-solid fa-house me-2"></i> الصفحة الرئيسية
+            </a>
+            @if (User.Identity?.IsAuthenticated != true)
+            {
+                <a asp-controller="Account" asp-action="Login" class="btn btn-outline-dark rounded-pill px-4 py-2 fs-6">
+                    <i class="fa-solid fa-right-to-bracket me-2"></i> تسجيل الدخول
+                </a>
+            }
+        </div>
+    </div>
+</section>

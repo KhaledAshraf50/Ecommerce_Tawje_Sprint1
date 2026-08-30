@@ -77,5 +77,10 @@ namespace ECommerce_Tawj.Controllers
             await _accountService.LogoutAsync();
             return RedirectToAction("Index","Home");
         }
+
+        public IActionResult AccessDeny()
+        {
+            return View();
+        }
     }
 }

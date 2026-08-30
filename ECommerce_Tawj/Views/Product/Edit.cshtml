@@ -1,4 +1,5 @@
 ﻿@using ECommerce_Tawj.DTOs.ProductsDTOs
+
 @model ProductEditDTO
 
 @{
@@ -8,10 +9,10 @@
 @section Styles{
     <style>
         .upload-box {
-            width: 100px; /* عرض المربع */
-            height: 100px; /* طول المربع */
-            position: relative; /* عشان الصورة تثبت جواه */
-            overflow: hidden; /* مهم جداً: بيقص أي حاجة تخرج برة المربع */
+            width: 100px; 
+            height: 100px; 
+            position: relative; 
+            overflow: hidden; 
             border: 2px dashed #ccc;
             border-radius: 8px;
             display: flex;
@@ -23,7 +24,7 @@
             .upload-box img {
                 width: 100% !important;
                 height: 100% !important;
-                object-fit: cover; /* بيخلي الصورة تملى المربع وتكون مضبوطة بدون مط */
+                object-fit: cover;
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -82,6 +83,11 @@
                             <span asp-validation-for="NewImages" class="text-danger"></span>
                         }
                     </div>
+                    <input asp-for="NewImages"
+                           class="form-control"
+                           type="file"
+                           accept="image/*" />
+
                 </div>
 
                 <div class="col-12">
